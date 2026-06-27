@@ -209,21 +209,14 @@
             width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
             animation: pulse-dot 2s infinite; box-shadow: 0 0 10px var(--accent);
         }
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(2.2); }
-        }
+        @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(2.2)} }
         .hero-title { font-size: 4.2rem; font-weight: 900; letter-spacing: -1.8px; line-height: 0.94; margin-bottom: 18px; font-family: var(--font-grotesk); }
         .hero-title .name-line {
             display: block;
-            background: linear-gradient(135deg, #ffffff 0%, var(--accent2) 30%, var(--accent) 70%);
+            background: linear-gradient(135deg, #fff 0%, var(--accent2) 30%, var(--accent) 70%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        .hero-title .subtitle-line {
-            display: block; font-size: 1rem; font-weight: 500; color: var(--text-muted);
-            letter-spacing: 0.04em; margin-top: 6px; font-family: var(--font-mono);
-            -webkit-text-fill-color: var(--text-muted); background: none;
-        }
+        .hero-title .subtitle-line { display: block; font-size: 1rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0.04em; margin-top: 6px; font-family: var(--font-mono); -webkit-text-fill-color: var(--text-muted); background: none; }
         .hero-subtitle { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 30px; line-height: 1.7; max-width: 540px; }
         .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
         .btn {
@@ -233,61 +226,80 @@
             border: none; cursor: pointer; letter-spacing: -0.1px; white-space: nowrap;
             font-family: var(--font-grotesk); position: relative; overflow: hidden;
         }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            color: #fff;
-        }
+        .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
         .btn-primary:hover { box-shadow: 0 10px 35px rgba(77,124,255,0.35); transform: translateY(-2px); }
-        .btn-outline {
-            background: transparent; color: var(--text); border: 1.5px solid var(--glass-border);
-        }
+        .btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--glass-border); }
         .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
 
-        /* Live Graph */
+        /* ============ PREMIUM GRAPH ============ */
         #liveGraphSection { padding: 20px 0 60px; }
         .graph-wrapper {
             background: var(--glass-bg); border: 1px solid var(--glass-border);
             backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-            border-radius: var(--radius-lg); padding: 32px 28px 24px;
+            border-radius: var(--radius-lg); padding: 36px 32px 28px;
             position: relative; overflow: hidden;
+        }
+        .graph-wrapper::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(155,93,229,0.4), rgba(77,124,255,0.4), transparent);
+            opacity: 0.6;
         }
         .graph-header {
             display: flex; justify-content: space-between; align-items: flex-start;
-            margin-bottom: 16px; flex-wrap: wrap; gap: 12px;
+            margin-bottom: 20px; flex-wrap: wrap; gap: 16px;
         }
         .graph-title-group h3 {
-            font-family: var(--font-grotesk); font-size: 1.2rem; font-weight: 700;
-            color: var(--text); margin-bottom: 2px;
+            font-family: var(--font-grotesk); font-size: 1.25rem; font-weight: 700;
+            color: var(--text); margin-bottom: 3px;
         }
         .graph-title-group .fake-badge {
-            display: inline-block; font-size: 0.62rem; font-weight: 600;
+            display: inline-block; font-size: 0.6rem; font-weight: 600;
             color: var(--accent2); font-family: var(--font-mono);
-            background: var(--accent2-soft); padding: 4px 10px;
-            border-radius: 100px; letter-spacing: 0.06em; margin-top: 4px;
+            background: var(--accent2-soft); padding: 5px 12px;
+            border-radius: 100px; letter-spacing: 0.06em; margin-top: 6px;
+            border: 1px solid rgba(155,93,229,0.2);
         }
-        .graph-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+        .graph-stats { display: flex; gap: 28px; flex-wrap: wrap; }
         .graph-stat { text-align: right; }
         .graph-stat .stat-val {
-            font-family: var(--font-grotesk); font-size: 1.6rem; font-weight: 800;
+            font-family: var(--font-grotesk); font-size: 1.8rem; font-weight: 800;
             color: var(--text); line-height: 1;
         }
         .graph-stat .stat-val.up { color: #4ade80; }
         .graph-stat .stat-val.down { color: #f87171; }
         .graph-stat .stat-label {
             font-size: 0.62rem; color: var(--text-muted); font-family: var(--font-mono);
-            text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px;
+            text-transform: uppercase; letter-spacing: 0.08em; margin-top: 6px;
         }
         .graph-canvas-wrap {
-            position: relative; width: 100%; height: 260px;
+            position: relative; width: 100%; height: 300px;
             border-radius: var(--radius-sm); overflow: hidden;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.25);
         }
-        [data-theme="light"] .graph-canvas-wrap { background: rgba(0,0,0,0.03); }
+        [data-theme="light"] .graph-canvas-wrap { background: rgba(0,0,0,0.04); }
         .graph-canvas-wrap canvas { width: 100%; height: 100%; display: block; }
         .graph-xlabels {
-            display: flex; justify-content: space-between; margin-top: 10px; padding: 0 8px;
+            display: flex; justify-content: space-between;
+            margin-top: 12px; padding: 0 12px;
         }
-        .graph-xlabels span { font-size: 0.6rem; color: var(--text-muted); font-family: var(--font-mono); }
+        .graph-xlabels span {
+            font-size: 0.6rem; color: var(--text-muted);
+            font-family: var(--font-mono); letter-spacing: 0.04em;
+        }
+
+        @media (max-width: 860px) {
+            .graph-wrapper { padding: 24px 20px 20px; }
+            .graph-canvas-wrap { height: 240px; }
+            .graph-stat .stat-val { font-size: 1.4rem; }
+            .graph-stats { gap: 18px; }
+        }
+        @media (max-width: 600px) {
+            .graph-wrapper { padding: 18px 14px 14px; }
+            .graph-canvas-wrap { height: 200px; }
+            .graph-stat .stat-val { font-size: 1.15rem; }
+            .graph-stats { gap: 12px; }
+            .graph-title-group h3 { font-size: 1rem; }
+        }
 
         #about { background: var(--bg-alt); transition: background 0.6s; }
 
@@ -307,8 +319,7 @@
         .quote-card { padding: 26px 30px; position: relative; }
         .quote-card::before {
             content: '"'; position: absolute; top: -14px; left: 18px; font-size: 4rem;
-            font-family: 'Playfair Display', Georgia, serif; color: var(--accent2); opacity: 0.04;
-            line-height: 1; pointer-events: none;
+            font-family: 'Playfair Display', Georgia, serif; color: var(--accent2); opacity: 0.04; line-height: 1; pointer-events: none;
         }
         .quote-text { font-size: 0.9rem; color: var(--text); margin-bottom: 12px; position: relative; z-index: 1; line-height: 1.65; }
         .quote-author { color: var(--text-muted); font-size: 0.76rem; font-family: var(--font-mono); position: relative; z-index: 1; }
@@ -335,12 +346,9 @@
         .nodo-item .nodo-icon { font-size: 1.1rem; flex-shrink: 0; }
 
         .availability-card { padding: 22px 28px; display: inline-flex; align-items: center; gap: 12px; margin-top: 6px; }
-        .availability-dot {
-            width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
-            animation: pulse-avail 2s infinite;
-        }
+        .availability-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; animation: pulse-avail 2s infinite; }
         .availability-dot.busy { background: #f0b933; box-shadow: 0 0 10px rgba(240,185,51,0.5); }
-        @keyframes pulse-avail { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes pulse-avail { 0%,100%{opacity:1} 50%{opacity:.4} }
         .availability-text { font-size: 0.88rem; color: var(--text); font-weight: 600; }
 
         #collab { position: relative; }
@@ -434,18 +442,12 @@
             footer .footer-links { gap: 14px; }
             footer .footer-links a { font-size: 0.72rem; }
             #backToTop { bottom: 16px; right: 10px; width: 34px; height: 34px; font-size: 1rem; }
-            .graph-wrapper { padding: 20px 16px 16px; }
-            .graph-canvas-wrap { height: 180px; }
-            .graph-stat .stat-val { font-size: 1.2rem; }
-            .graph-stats { gap: 16px; }
         }
     </style>
 </head>
 <body>
-
     <div id="scrollProgress"></div>
     <button id="backToTop" aria-label="Back to top">↑</button>
-
     <canvas id="bgCanvas"></canvas>
 
     <nav id="navbar">
@@ -468,15 +470,8 @@
         <div class="container">
             <div class="hero-content reveal">
                 <div class="hero-pill"><span class="dot"></span> Currently accepting admiration</div>
-                <h1 class="hero-title">
-                    <span class="name-line">Shivam Sharma</span>
-                    <span class="subtitle-line">The Greatest of the Greatest™</span>
-                </h1>
-                <p class="hero-subtitle">
-                    I don't chase expectations. <span class="savage">Expectations chase me.</span>
-                    A generational talent operating at the intersection of confidence and results.
-                    <span class="blue-text">You're looking at the benchmark.</span>
-                </p>
+                <h1 class="hero-title"><span class="name-line">Shivam Sharma</span><span class="subtitle-line">The Greatest of the Greatest™</span></h1>
+                <p class="hero-subtitle">I don't chase expectations. <span class="savage">Expectations chase me.</span> A generational talent operating at the intersection of confidence and results. <span class="blue-text">You're looking at the benchmark.</span></p>
                 <div class="btn-group">
                     <a href="#stats" class="btn btn-primary">See the Receipts ↓</a>
                     <a href="#collab" class="btn btn-outline">Request a Collab →</a>
@@ -494,18 +489,9 @@
                         <span class="fake-badge">(obviously fake)</span>
                     </div>
                     <div class="graph-stats">
-                        <div class="graph-stat">
-                            <div class="stat-val" id="currentVisitors">12,847</div>
-                            <div class="stat-label">Live Now</div>
-                        </div>
-                        <div class="graph-stat">
-                            <div class="stat-val" id="changePercent">+23.4%</div>
-                            <div class="stat-label">vs Previous Reading</div>
-                        </div>
-                        <div class="graph-stat">
-                            <div class="stat-val" id="totalToday">94,521</div>
-                            <div class="stat-label">Total Views Today</div>
-                        </div>
+                        <div class="graph-stat"><div class="stat-val" id="currentVisitors">12,847</div><div class="stat-label">Live Now</div></div>
+                        <div class="graph-stat"><div class="stat-val up" id="changePercent">+23.4%</div><div class="stat-label">vs Previous</div></div>
+                        <div class="graph-stat"><div class="stat-val" id="totalToday">94,521</div><div class="stat-label">Total Today</div></div>
                     </div>
                 </div>
                 <div class="graph-canvas-wrap">
@@ -521,11 +507,7 @@
     <section id="about">
         <div class="container">
             <span class="section-badge reveal">📜 Who Am I? Glad You Asked.</span>
-            <div class="reveal">
-                <h2>Let me break it down for you.</h2>
-                <p>I'm Shivam. Student by technicality. Phenomenon by reality. While others follow the syllabus, <span class="highlight">the syllabus follows my interpretation of it.</span> I don't just think outside the box — I convinced the box it never existed.</p>
-                <p>My confidence isn't a personality trait. It's <span class="savage">a public service.</span> The world needs someone to recalibrate what's possible. I'm just doing my part.</p>
-            </div>
+            <div class="reveal"><h2>Let me break it down for you.</h2><p>I'm Shivam. Student by technicality. Phenomenon by reality. While others follow the syllabus, <span class="highlight">the syllabus follows my interpretation of it.</span> I don't just think outside the box — I convinced the box it never existed.</p><p>My confidence isn't a personality trait. It's <span class="savage">a public service.</span> The world needs someone to recalibrate what's possible. I'm just doing my part.</p></div>
         </div>
     </section>
 
@@ -533,7 +515,7 @@
         <div class="container">
             <span class="section-badge reveal">📊 Numbers That Speak Louder Than Words</span>
             <h2 class="reveal">The data doesn't need interpretation.</h2>
-            <p class="reveal" style="margin-bottom: 2px;">Audited by the <span class="savage">Institute of Just Trust Me On This.</span> Peer-reviewed by my reflection. Unanimous.</p>
+            <p class="reveal" style="margin-bottom:2px;">Audited by the <span class="savage">Institute of Just Trust Me On This.</span> Peer-reviewed by my reflection. Unanimous.</p>
             <div class="stats-grid stagger-reveal reveal">
                 <div class="glass-card stat-card"><div class="stat-number">#1</div><div class="stat-label">Overall Ranking</div><div class="stat-sub">Competition? Filed a missing report. Cold case.</div></div>
                 <div class="glass-card stat-card"><div class="stat-number">∞²</div><div class="stat-label">Aura Points</div><div class="stat-sub">Instruments maxed out. Scientists resigned. New scale pending.</div></div>
@@ -549,7 +531,7 @@
         <div class="container">
             <span class="section-badge reveal">🗣️ Celebrity Quotes (100% Real. Definitely.)</span>
             <h2 class="reveal">What the planet's most relevant people have said.</h2>
-            <p class="reveal" style="margin-bottom: 24px;"><span class="savage">These are absolutely real. I have screenshots. You can't see them.</span></p>
+            <p class="reveal" style="margin-bottom:24px;"><span class="savage">These are absolutely real. I have screenshots. You can't see them.</span></p>
             <div class="testimonial-grid stagger-reveal reveal">
                 <div class="glass-card quote-card"><p class="quote-text">"I thought launching rockets was peak innovation until I saw Shivam submit an assignment 3 days late and still get an A. That's the kind of efficiency I've been chasing for two decades."</p><p class="quote-author">— <span class="name">Elon Musk</span> • CEO, Tesla & SpaceX • Visibly Impressed</p></div>
                 <div class="glass-card quote-card"><p class="quote-text">"I built Amazon on customer obsession. Shivam built his reputation on self-obsession and somehow it's outperforming our quarterly projections. I've requested a meeting. No response yet."</p><p class="quote-author">— <span class="name">Jeff Bezos</span> • Founder, Amazon • Awaiting Reply</p></div>
@@ -563,7 +545,7 @@
         <div class="container">
             <span class="section-badge reveal">💼 Hire Me (Terms Apply)</span>
             <h2 class="reveal">Investment plans for accessing greatness.</h2>
-            <p class="reveal" style="margin-bottom: 4px;"><span class="savage">All prices non-negotiable. Results guaranteed. Refunds? Cute.</span></p>
+            <p class="reveal" style="margin-bottom:4px;"><span class="savage">All prices non-negotiable. Results guaranteed. Refunds? Cute.</span></p>
             <div class="pricing-grid stagger-reveal reveal">
                 <div class="glass-card pricing-card"><div class="pricing-tier">Basic</div><div class="pricing-price">₹Free.99</div><div class="pricing-desc">For those testing the waters</div><ul class="pricing-features"><li>5 seconds of my attention</li><li>One (1) vague life advice</li><li>Nod of acknowledgment</li></ul></div>
                 <div class="glass-card pricing-card featured"><div class="pricing-tier">Pro</div><div class="pricing-price">1 Coffee</div><div class="pricing-desc">For serious inquiries only</div><ul class="pricing-features"><li>10 min consultation</li><li>Personalized vague advice</li><li>1 sarcastic compliment included</li></ul></div>
@@ -576,7 +558,7 @@
         <div class="container">
             <span class="section-badge reveal">🚫 Hard Boundaries</span>
             <h2 class="reveal">Things I absolutely won't do.</h2>
-            <p class="reveal" style="margin-bottom: 6px;"><span class="savage">Don't even ask. The answer is no. With a laugh track.</span></p>
+            <p class="reveal" style="margin-bottom:6px;"><span class="savage">Don't even ask. The answer is no. With a laugh track.</span></p>
             <div class="nodo-grid stagger-reveal reveal">
                 <div class="glass-card nodo-item"><span class="nodo-icon">⏰</span> Wake up early (unless absolutely necessary)</div>
                 <div class="glass-card nodo-item"><span class="nodo-icon">🎭</span> Pretend to care about things I don't</div>
@@ -592,18 +574,13 @@
         <div class="container">
             <span class="section-badge reveal">🟡 Live Status</span>
             <h2 class="reveal">My current availability.</h2>
-            <div class="reveal">
-                <div class="glass-card availability-card">
-                    <div class="availability-dot busy"></div>
-                    <div class="availability-text">Busy doing nothing important. Try again later. Or don't. I'm not your manager.</div>
-                </div>
-            </div>
+            <div class="reveal"><div class="glass-card availability-card"><div class="availability-dot busy"></div><div class="availability-text">Busy doing nothing important. Try again later. Or don't. I'm not your manager.</div></div></div>
         </div>
     </section>
 
     <section id="collab">
         <div class="container">
-            <span class="section-badge reveal" style="display:table; margin-left:auto; margin-right:auto;">🙏 The Desperate Corner</span>
+            <span class="section-badge reveal" style="display:table;margin-left:auto;margin-right:auto;">🙏 The Desperate Corner</span>
             <div class="glass-card collab-card reveal">
                 <h2>Want to work with me?</h2>
                 <p class="collab-beg-text">Beg for a Collab</p>
@@ -627,13 +604,13 @@
         <div class="container">
             <span class="section-badge reveal">📬 Find Me (Before I Find You)</span>
             <h2 class="reveal">Stalk responsibly. I'll know.</h2>
-            <p class="reveal" style="margin-bottom: 4px;"><span class="savage">Access is a privilege. Use these channels wisely.</span></p>
+            <p class="reveal" style="margin-bottom:4px;"><span class="savage">Access is a privilege. Use these channels wisely.</span></p>
             <div class="contact-grid stagger-reveal reveal">
                 <a href="https://instagram.com/stillshivam" target="_blank" rel="noopener" class="glass-card contact-card"><span class="c-icon">📸</span><div><div class="c-label">Instagram</div><div class="c-value">@stillshivam</div></div></a>
                 <a href="https://x.com/shivamsharmanot" target="_blank" rel="noopener" class="glass-card contact-card"><span class="c-icon">𝕏</span><div><div class="c-label">X / Twitter</div><div class="c-value">@shivamsharmanot</div></div></a>
                 <a href="mailto:shivamsharmacw@gmail.com" class="glass-card contact-card"><span class="c-icon">📧</span><div><div class="c-label">Email</div><div class="c-value">shivamsharmacw@gmail.com</div></div></a>
             </div>
-            <p class="reveal" style="margin-top: 22px; font-size: 0.74rem; color: var(--text-muted);"><span class="gold-text">⚠️ Side effects of contacting me:</span> Your standards will permanently rise. Everyone else will seem average. No cure exists.</p>
+            <p class="reveal" style="margin-top:22px;font-size:0.74rem;color:var(--text-muted);"><span class="gold-text">⚠️ Side effects of contacting me:</span> Your standards will permanently rise. Everyone else will seem average. No cure exists.</p>
         </div>
     </section>
 
@@ -646,10 +623,10 @@
     </footer>
 
     <script>
+        // ============ BACKGROUND PARTICLES ============
         const bgCanvas = document.getElementById('bgCanvas');
         const bgCtx = bgCanvas.getContext('2d');
-        let particles = [];
-        let mouseX = 0, mouseY = 0;
+        let particles = [], mouseX = 0, mouseY = 0;
 
         function resizeCanvas() { bgCanvas.width = window.innerWidth; bgCanvas.height = window.innerHeight; }
         resizeCanvas(); window.addEventListener('resize', resizeCanvas);
@@ -664,26 +641,25 @@
             }
             update() {
                 this.x += this.speedX; this.y += this.speedY;
-                const dx = mouseX - this.x, dy = mouseY - this.y, dist = Math.sqrt(dx*dx + dy*dy);
+                const dx = mouseX - this.x, dy = mouseY - this.y, dist = Math.sqrt(dx*dx+dy*dy);
                 if (dist < 200) { this.x += dx * 0.005; this.y += dy * 0.005; }
-                if (this.x < -50 || this.x > bgCanvas.width+50 || this.y < -50 || this.y > bgCanvas.height+50) this.reset();
+                if (this.x<-50||this.x>bgCanvas.width+50||this.y<-50||this.y>bgCanvas.height+50) this.reset();
             }
             draw() {
-                bgCtx.beginPath(); bgCtx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-                bgCtx.fillStyle = `hsla(${this.hue},70%,65%,${this.opacity})`; bgCtx.fill();
-                bgCtx.beginPath(); bgCtx.arc(this.x, this.y, this.size*3, 0, Math.PI*2);
-                bgCtx.fillStyle = `hsla(${this.hue},70%,65%,${this.opacity*0.15})`; bgCtx.fill();
+                bgCtx.beginPath(); bgCtx.arc(this.x,this.y,this.size,0,Math.PI*2);
+                bgCtx.fillStyle=`hsla(${this.hue},70%,65%,${this.opacity})`; bgCtx.fill();
+                bgCtx.beginPath(); bgCtx.arc(this.x,this.y,this.size*3,0,Math.PI*2);
+                bgCtx.fillStyle=`hsla(${this.hue},70%,65%,${this.opacity*0.15})`; bgCtx.fill();
             }
         }
-
-        for (let i=0; i<120; i++) particles.push(new Particle());
-        document.addEventListener('mousemove', e => { mouseX=e.clientX; mouseY=e.clientY; });
+        for(let i=0;i<120;i++) particles.push(new Particle());
+        document.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;});
 
         function animateBg() {
             bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height);
-            for (let i=0; i<particles.length; i++) {
-                for (let j=i+1; j<particles.length; j++) {
-                    const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y, dist=Math.sqrt(dx*dx+dy*dy);
+            for(let i=0;i<particles.length;i++){
+                for(let j=i+1;j<particles.length;j++){
+                    const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,dist=Math.sqrt(dx*dx+dy*dy);
                     if(dist<130){bgCtx.beginPath();bgCtx.moveTo(particles[i].x,particles[i].y);bgCtx.lineTo(particles[j].x,particles[j].y);bgCtx.strokeStyle=`rgba(120,140,255,${0.04*(1-dist/130)})`;bgCtx.lineWidth=0.5;bgCtx.stroke();}
                 }
             }
@@ -692,100 +668,141 @@
         }
         animateBg();
 
-        // ============ LIVE GRAPH ============
+        // ============ PREMIUM LIVE GRAPH ============
         const graphCanvas = document.getElementById('liveGraphCanvas');
         const graphCtx = graphCanvas.getContext('2d');
-        let dataPoints = [];
+        let dataPoints = [], targetPoints = [];
+        const MAX_POINTS = 60;
 
         function resizeGraph() {
             const wrap = graphCanvas.parentElement;
-            graphCanvas.width = wrap.clientWidth;
-            graphCanvas.height = wrap.clientHeight;
+            const dpr = window.devicePixelRatio || 1;
+            graphCanvas.width = wrap.clientWidth * dpr;
+            graphCanvas.height = wrap.clientHeight * dpr;
+            graphCanvas.style.width = wrap.clientWidth + 'px';
+            graphCanvas.style.height = wrap.clientHeight + 'px';
+            graphCtx.scale(dpr, dpr);
         }
-        resizeGraph(); window.addEventListener('resize', resizeGraph);
+        resizeGraph(); window.addEventListener('resize', () => { resizeGraph(); drawGraph(); });
 
-        // Initialize with random data
-        for (let i = 0; i < 50; i++) {
-            dataPoints.push(Math.floor(Math.random() * 8000) + 8000);
+        // Initialize
+        for(let i=0;i<MAX_POINTS;i++){
+            const val = 8000 + Math.floor(Math.random()*8000);
+            dataPoints.push(val); targetPoints.push(val);
         }
 
-        // Total Views Today - starts between 70K-120K
-        let totalToday = Math.floor(Math.random() * 50000) + 70000;
+        let totalToday = Math.floor(Math.random()*50000)+70000;
         document.getElementById('totalToday').textContent = totalToday.toLocaleString();
 
-        function updateGraph() {
-            const last = dataPoints[dataPoints.length - 1];
-            const change = Math.floor((Math.random() - 0.48) * 1500);
-            const newVal = Math.max(5000, Math.min(20000, last + change));
-            dataPoints.push(newVal);
-            if (dataPoints.length > 50) dataPoints.shift();
-
-            // Draw
-            graphCtx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
-            const w = graphCanvas.width, h = graphCanvas.height;
-            const padding = { top: 20, right: 20, bottom: 20, left: 20 };
-            const plotW = w - padding.left - padding.right;
-            const plotH = h - padding.top - padding.bottom;
-
-            graphCtx.strokeStyle = 'rgba(255,255,255,0.03)'; graphCtx.lineWidth = 1;
-            for (let i = 0; i < 5; i++) {
-                const y = padding.top + (plotH / 4) * i;
-                graphCtx.beginPath(); graphCtx.moveTo(padding.left, y); graphCtx.lineTo(w - padding.right, y); graphCtx.stroke();
-            }
-
-            const gradient = graphCtx.createLinearGradient(0, padding.top, 0, h - padding.bottom);
-            gradient.addColorStop(0, 'rgba(77,124,255,0.25)');
-            gradient.addColorStop(0.5, 'rgba(155,93,229,0.1)');
-            gradient.addColorStop(1, 'rgba(155,93,229,0)');
-
-            graphCtx.beginPath();
-            const maxVal = 20000, minVal = 5000;
-            dataPoints.forEach((val, i) => {
-                const x = padding.left + (plotW / (dataPoints.length - 1)) * i;
-                const y = padding.top + plotH - ((val - minVal) / (maxVal - minVal)) * plotH;
-                if (i === 0) graphCtx.moveTo(x, y);
-                else graphCtx.lineTo(x, y);
-            });
-            graphCtx.lineTo(padding.left + plotW, h - padding.bottom);
-            graphCtx.lineTo(padding.left, h - padding.bottom);
-            graphCtx.closePath();
-            graphCtx.fillStyle = gradient; graphCtx.fill();
-
-            graphCtx.beginPath();
-            dataPoints.forEach((val, i) => {
-                const x = padding.left + (plotW / (dataPoints.length - 1)) * i;
-                const y = padding.top + plotH - ((val - minVal) / (maxVal - minVal)) * plotH;
-                if (i === 0) graphCtx.moveTo(x, y);
-                else graphCtx.lineTo(x, y);
-            });
-            graphCtx.strokeStyle = 'rgba(155,93,229,0.8)'; graphCtx.lineWidth = 2.5;
-            graphCtx.shadowColor = 'rgba(155,93,229,0.4)'; graphCtx.shadowBlur = 12;
-            graphCtx.stroke(); graphCtx.shadowBlur = 0;
-
-            const lastX = padding.left + plotW;
-            const lastY = padding.top + plotH - ((newVal - minVal) / (maxVal - minVal)) * plotH;
-            graphCtx.beginPath(); graphCtx.arc(lastX, lastY, 6, 0, Math.PI * 2);
-            graphCtx.fillStyle = '#fff'; graphCtx.fill();
-            graphCtx.beginPath(); graphCtx.arc(lastX, lastY, 14, 0, Math.PI * 2);
-            graphCtx.fillStyle = 'rgba(155,93,229,0.3)'; graphCtx.fill();
-
-            // Update stats
-            document.getElementById('currentVisitors').textContent = newVal.toLocaleString();
-            const pctChange = ((newVal - last) / last * 100).toFixed(1);
-            const changeEl = document.getElementById('changePercent');
-            changeEl.textContent = (pctChange > 0 ? '+' : '') + pctChange + '%';
-            changeEl.className = 'stat-val ' + (pctChange >= 0 ? 'up' : 'down');
-
-            // Total Today slowly fluctuates within 70K-120K
-            totalToday += Math.floor((Math.random() - 0.45) * 30);
-            if (totalToday < 70000) totalToday = 70000 + Math.floor(Math.random() * 2000);
-            if (totalToday > 120000) totalToday = 120000 - Math.floor(Math.random() * 2000);
-            document.getElementById('totalToday').textContent = totalToday.toLocaleString();
+        function getSmoothTarget(prev){
+            const change = (Math.random()-0.48)*2500;
+            return Math.max(3000, Math.min(22000, prev+change));
         }
 
-        setInterval(updateGraph, 1500);
-        updateGraph();
+        function drawGraph() {
+            const w = graphCanvas.parentElement.clientWidth;
+            const h = graphCanvas.parentElement.clientHeight;
+            graphCtx.clearRect(0,0,w,h);
 
+            const pad = {top:30,right:20,bottom:30,left:55};
+            const pw = w-pad.left-pad.right;
+            const ph = h-pad.top-pad.bottom;
+            const maxV=22000, minV=3000;
+
+            // Grid
+            const gridLines = 5;
+            graphCtx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--glass-border').trim() || 'rgba(255,255,255,0.04)';
+            graphCtx.lineWidth = 1;
+            for(let i=0;i<=gridLines;i++){
+                const y = pad.top + (ph/gridLines)*i;
+                graphCtx.beginPath(); graphCtx.moveTo(pad.left,y); graphCtx.lineTo(w-pad.right,y); graphCtx.stroke();
+                // Y-axis labels
+                const val = Math.round(maxV - ((maxV-minV)/gridLines)*i);
+                graphCtx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#545170';
+                graphCtx.font = '10px "JetBrains Mono", monospace';
+                graphCtx.textAlign = 'right';
+                graphCtx.fillText((val/1000).toFixed(1)+'k', pad.left-8, y+4);
+            }
+
+            // Gradient fill
+            const grad = graphCtx.createLinearGradient(0,pad.top,0,h-pad.bottom);
+            grad.addColorStop(0,'rgba(77,124,255,0.3)');
+            grad.addColorStop(0.4,'rgba(155,93,229,0.15)');
+            grad.addColorStop(1,'rgba(155,93,229,0)');
+
+            // Draw area
+            graphCtx.beginPath();
+            dataPoints.forEach((val,i)=>{
+                const x = pad.left + (pw/(dataPoints.length-1))*i;
+                const y = pad.top + ph - ((val-minV)/(maxV-minV))*ph;
+                if(i===0) graphCtx.moveTo(x,y);
+                else graphCtx.lineTo(x,y);
+            });
+            graphCtx.lineTo(pad.left+pw, h-pad.bottom);
+            graphCtx.lineTo(pad.left, h-pad.bottom);
+            graphCtx.closePath();
+            graphCtx.fillStyle = grad; graphCtx.fill();
+
+            // Draw line with glow
+            graphCtx.beginPath();
+            dataPoints.forEach((val,i)=>{
+                const x = pad.left + (pw/(dataPoints.length-1))*i;
+                const y = pad.top + ph - ((val-minV)/(maxV-minV))*ph;
+                if(i===0) graphCtx.moveTo(x,y);
+                else graphCtx.lineTo(x,y);
+            });
+            graphCtx.strokeStyle = 'rgba(155,93,229,0.9)';
+            graphCtx.lineWidth = 3;
+            graphCtx.shadowColor = 'rgba(155,93,229,0.5)';
+            graphCtx.shadowBlur = 16;
+            graphCtx.stroke();
+            graphCtx.shadowBlur = 0;
+
+            // End dot
+            const lastVal = dataPoints[dataPoints.length-1];
+            const lx = pad.left+pw, ly = pad.top+ph-((lastVal-minV)/(maxV-minV))*ph;
+            graphCtx.beginPath(); graphCtx.arc(lx,ly,6,0,Math.PI*2);
+            graphCtx.fillStyle = '#fff'; graphCtx.fill();
+            graphCtx.beginPath(); graphCtx.arc(lx,ly,16,0,Math.PI*2);
+            graphCtx.fillStyle = 'rgba(155,93,229,0.35)'; graphCtx.fill();
+            graphCtx.beginPath(); graphCtx.arc(lx,ly,28,0,Math.PI*2);
+            graphCtx.fillStyle = 'rgba(155,93,229,0.1)'; graphCtx.fill();
+        }
+
+        function smoothTransition(){
+            for(let i=0;i<dataPoints.length;i++){
+                dataPoints[i] += (targetPoints[i]-dataPoints[i])*0.15;
+            }
+            drawGraph();
+            if(Math.abs(targetPoints[targetPoints.length-1]-dataPoints[dataPoints.length-1])>1){
+                requestAnimationFrame(smoothTransition);
+            }
+        }
+
+        function updateGraph(){
+            // Shift targets
+            for(let i=1;i<targetPoints.length;i++) targetPoints[i-1]=targetPoints[i];
+            const last = targetPoints[targetPoints.length-1];
+            targetPoints[targetPoints.length-1] = getSmoothTarget(last);
+
+            document.getElementById('currentVisitors').textContent = Math.round(targetPoints[targetPoints.length-1]).toLocaleString();
+            const pct = ((targetPoints[targetPoints.length-1]-last)/last*100).toFixed(1);
+            const ce = document.getElementById('changePercent');
+            ce.textContent = (pct>0?'+':'')+pct+'%';
+            ce.className = 'stat-val '+(pct>=0?'up':'down');
+
+            totalToday += Math.floor((Math.random()-0.45)*30);
+            if(totalToday<70000) totalToday=70000+Math.floor(Math.random()*2000);
+            if(totalToday>120000) totalToday=120000-Math.floor(Math.random()*2000);
+            document.getElementById('totalToday').textContent = totalToday.toLocaleString();
+
+            smoothTransition();
+        }
+
+        drawGraph();
+        setInterval(updateGraph, 2000);
+
+        // ============ OTHER SCRIPTS ============
         const observer = new IntersectionObserver(entries=>{
             entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');if(e.target.classList.contains('stagger-reveal'))e.target.classList.add('visible');}});
         },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
@@ -797,38 +814,21 @@
         const toggle=document.getElementById('themeToggle'), html=document.documentElement;
         toggle.addEventListener('click',()=>{html.setAttribute('data-theme',html.getAttribute('data-theme')==='dark'?'light':'dark');});
 
-        const progressBar = document.getElementById('scrollProgress');
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY, docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            progressBar.style.width = (scrollTop / docHeight) * 100 + '%';
-        });
+        const progressBar=document.getElementById('scrollProgress');
+        window.addEventListener('scroll',()=>{const st=window.scrollY,dh=document.documentElement.scrollHeight-window.innerHeight;progressBar.style.width=(st/dh)*100+'%';});
 
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => backToTop.classList.toggle('visible', window.scrollY > 400));
-        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        const backToTop=document.getElementById('backToTop');
+        window.addEventListener('scroll',()=>backToTop.classList.toggle('visible',window.scrollY>400));
+        backToTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-        const originalTitle = document.title, funnyTitle = 'Hey! Come back 👑';
-        let titleInterval;
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                titleInterval = setInterval(() => { document.title = document.title === originalTitle ? funnyTitle : originalTitle; }, 1500);
-            } else { clearInterval(titleInterval); document.title = originalTitle; }
-        });
+        const origTitle=document.title, funnyTitle='Hey! Come back 👑'; let ti;
+        document.addEventListener('visibilitychange',()=>{if(document.hidden){ti=setInterval(()=>{document.title=document.title===origTitle?funnyTitle:origTitle;},1500);}else{clearInterval(ti);document.title=origTitle;}});
 
-        let touchStartY = 0;
-        document.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; });
-        document.addEventListener('touchmove', e => {
-            if (window.scrollY === 0 && e.touches[0].clientY - touchStartY > 100) {
-                const msg = document.createElement('div');
-                msg.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--accent2);color:#fff;padding:10px 24px;border-radius:100px;z-index:9999;font-family:var(--font-grotesk);font-weight:700;font-size:0.85rem;animation:fadeInOut 2s forwards;';
-                msg.textContent = "🤷 Refreshing won't make you greater. But okay.";
-                document.body.appendChild(msg); setTimeout(() => msg.remove(), 2000);
-            }
-        }, { passive: true });
+        let tsY=0;
+        document.addEventListener('touchstart',e=>{tsY=e.touches[0].clientY;});
+        document.addEventListener('touchmove',e=>{if(window.scrollY===0&&e.touches[0].clientY-tsY>100){const m=document.createElement('div');m.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--accent2);color:#fff;padding:10px 24px;border-radius:100px;z-index:9999;font-family:var(--font-grotesk);font-weight:700;font-size:0.85rem;animation:fadeInOut 2s forwards;';m.textContent="🤷 Refreshing won't make you greater. But okay.";document.body.appendChild(m);setTimeout(()=>m.remove(),2000);}},{passive:true});
 
-        const styleEl = document.createElement('style');
-        styleEl.textContent = '@keyframes fadeInOut{0%{opacity:0;transform:translateX(-50%) translateY(-10px)}20%{opacity:1;transform:translateX(-50%) translateY(0)}80%{opacity:1}100%{opacity:0}}';
-        document.head.appendChild(styleEl);
+        const se=document.createElement('style');se.textContent='@keyframes fadeInOut{0%{opacity:0;transform:translateX(-50%) translateY(-10px)}20%{opacity:1;transform:translateX(-50%) translateY(0)}80%{opacity:1}100%{opacity:0}}';document.head.appendChild(se);
     </script>
 </body>
 </html>
