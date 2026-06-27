@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shivam Sharma — The Greatest of the Greatest</title>
 
-    <!-- OG Meta Tags -->
     <meta property="og:title" content="Shivam Sharma — The Greatest of the Greatest">
     <meta property="og:description" content="I don't chase expectations. Expectations chase me.">
     <meta property="og:type" content="website">
@@ -83,7 +82,6 @@
             z-index: 0; pointer-events: none; opacity: 0.5;
         }
 
-        /* Scroll Progress Bar */
         #scrollProgress {
             position: fixed; top: 0; left: 0; height: 2px;
             background: linear-gradient(90deg, var(--accent), var(--accent2));
@@ -91,7 +89,6 @@
             border-radius: 0 2px 2px 0;
         }
 
-        /* Back to Top */
         #backToTop {
             position: fixed; bottom: 28px; right: 28px; z-index: 999;
             width: 44px; height: 44px; border-radius: 50%;
@@ -103,17 +100,6 @@
         }
         #backToTop.visible { opacity: 1; visibility: visible; }
         #backToTop:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); transform: translateY(-3px); }
-
-        /* Visitor Counter */
-        #visitorCounter {
-            position: fixed; bottom: 28px; left: 28px; z-index: 999;
-            background: var(--glass-bg); border: 1px solid var(--glass-border);
-            backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-            padding: 8px 16px; border-radius: 100px; font-size: 0.68rem;
-            color: var(--text-muted); font-family: var(--font-mono);
-            pointer-events: none; white-space: nowrap;
-        }
-        #visitorCounter span { color: var(--gold); font-weight: 700; }
 
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -180,7 +166,7 @@
 
         /* Sections */
         section { padding: 80px 0; position: relative; }
-        section:first-of-type { padding-top: 130px; padding-bottom: 60px; }
+        section:first-of-type { padding-top: 130px; padding-bottom: 40px; }
         .section-badge {
             display: inline-block; font-size: 0.64rem; text-transform: uppercase;
             letter-spacing: 0.18em; font-weight: 700; font-family: var(--font-mono);
@@ -210,7 +196,7 @@
         }
         [data-theme="light"] .glass-card:hover { box-shadow: 0 20px 50px rgba(0,0,0,0.06); }
 
-        #hero { min-height: 90vh; display: flex; align-items: center; }
+        #hero { min-height: 85vh; display: flex; align-items: center; }
         .hero-content { max-width: 640px; }
         .hero-pill {
             display: inline-flex; align-items: center; gap: 7px;
@@ -257,6 +243,52 @@
         }
         .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
 
+        /* Live Graph */
+        #liveGraphSection { padding: 20px 0 60px; }
+        .graph-wrapper {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+            border-radius: var(--radius-lg); padding: 32px 28px 24px;
+            position: relative; overflow: hidden;
+        }
+        .graph-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 16px; flex-wrap: wrap; gap: 12px;
+        }
+        .graph-title-group h3 {
+            font-family: var(--font-grotesk); font-size: 1.2rem; font-weight: 700;
+            color: var(--text); margin-bottom: 2px;
+        }
+        .graph-title-group .fake-badge {
+            display: inline-block; font-size: 0.62rem; font-weight: 600;
+            color: var(--accent2); font-family: var(--font-mono);
+            background: var(--accent2-soft); padding: 4px 10px;
+            border-radius: 100px; letter-spacing: 0.06em; margin-top: 4px;
+        }
+        .graph-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+        .graph-stat { text-align: right; }
+        .graph-stat .stat-val {
+            font-family: var(--font-grotesk); font-size: 1.6rem; font-weight: 800;
+            color: var(--text); line-height: 1;
+        }
+        .graph-stat .stat-val.up { color: #4ade80; }
+        .graph-stat .stat-val.down { color: #f87171; }
+        .graph-stat .stat-label {
+            font-size: 0.62rem; color: var(--text-muted); font-family: var(--font-mono);
+            text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px;
+        }
+        .graph-canvas-wrap {
+            position: relative; width: 100%; height: 260px;
+            border-radius: var(--radius-sm); overflow: hidden;
+            background: rgba(0,0,0,0.2);
+        }
+        [data-theme="light"] .graph-canvas-wrap { background: rgba(0,0,0,0.03); }
+        .graph-canvas-wrap canvas { width: 100%; height: 100%; display: block; }
+        .graph-xlabels {
+            display: flex; justify-content: space-between; margin-top: 10px; padding: 0 8px;
+        }
+        .graph-xlabels span { font-size: 0.6rem; color: var(--text-muted); font-family: var(--font-mono); }
+
         #about { background: var(--bg-alt); transition: background 0.6s; }
 
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 10px; }
@@ -282,7 +314,6 @@
         .quote-author { color: var(--text-muted); font-size: 0.76rem; font-family: var(--font-mono); position: relative; z-index: 1; }
         .quote-author .name { color: var(--accent); font-weight: 700; }
 
-        /* Pricing */
         .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 10px; }
         .pricing-card { padding: 28px 22px; text-align: center; }
         .pricing-card.featured { border-color: var(--accent2); position: relative; }
@@ -299,42 +330,28 @@
         .pricing-features li::before { content: '✓'; color: var(--accent2); font-weight: 700; flex-shrink: 0; }
         .pricing-card .btn { width: 100%; justify-content: center; font-size: 0.8rem; padding: 10px 20px; }
 
-        /* No-Do List */
         .nodo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
-        .nodo-item {
-            display: flex; align-items: center; gap: 10px; padding: 14px 18px;
-            font-size: 0.88rem; color: var(--text-secondary);
-        }
+        .nodo-item { display: flex; align-items: center; gap: 10px; padding: 14px 18px; font-size: 0.88rem; color: var(--text-secondary); }
         .nodo-item .nodo-icon { font-size: 1.1rem; flex-shrink: 0; }
 
-        /* Availability */
         .availability-card { padding: 22px 28px; display: inline-flex; align-items: center; gap: 12px; margin-top: 6px; }
         .availability-dot {
             width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
             animation: pulse-avail 2s infinite;
         }
         .availability-dot.busy { background: #f0b933; box-shadow: 0 0 10px rgba(240,185,51,0.5); }
-        @keyframes pulse-avail {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
+        @keyframes pulse-avail { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
         .availability-text { font-size: 0.88rem; color: var(--text); font-weight: 600; }
 
         #collab { position: relative; }
         .collab-card { padding: 36px 32px; max-width: 580px; margin: 0 auto; }
         .collab-card h2 { font-size: 1.8rem; margin-bottom: 0; text-align: center; }
-        .collab-beg-text {
-            text-align: center; font-size: 1.05rem; font-weight: 700; color: var(--accent2);
-            margin-bottom: 4px; letter-spacing: -0.2px;
-        }
+        .collab-beg-text { text-align: center; font-size: 1.05rem; font-weight: 700; color: var(--accent2); margin-bottom: 4px; letter-spacing: -0.2px; }
         .collab-tagline { text-align: center; color: var(--text-secondary); font-size: 0.82rem; margin-bottom: 24px; }
         .collab-form { max-width: 480px; margin: 0 auto; }
         .collab-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 0; }
         .form-group { margin-bottom: 14px; }
-        .form-group label {
-            display: block; font-size: 0.67rem; font-weight: 600; color: var(--text-secondary);
-            margin-bottom: 6px; font-family: var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase;
-        }
+        .form-group label { display: block; font-size: 0.67rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; font-family: var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; }
         .form-group label .hint { font-weight: 400; color: var(--text-muted); font-size: 0.62rem; text-transform: none; letter-spacing: 0; }
         .form-group input, .form-group textarea, .form-group select {
             width: 100%; background: var(--input-bg); border: 1px solid var(--glass-border);
@@ -348,18 +365,14 @@
         .form-group select {
             appearance: none; -webkit-appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23545170' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px;
-            cursor: pointer;
+            background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; cursor: pointer;
         }
         .form-group select option { background: var(--dropdown-bg); color: var(--dropdown-text); padding: 10px; }
         .collab-form .btn { width: 100%; justify-content: center; padding: 14px; font-size: 0.9rem; margin-top: 6px; }
         .collab-note { margin-top: 14px; font-size: 0.63rem; color: var(--text-muted); text-align: center; line-height: 1.5; }
 
         .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
-        .contact-card {
-            padding: 18px 22px; text-decoration: none; display: flex;
-            align-items: center; gap: 12px; min-width: 0;
-        }
+        .contact-card { padding: 18px 22px; text-decoration: none; display: flex; align-items: center; gap: 12px; min-width: 0; }
         .contact-card .c-icon { font-size: 1.2rem; flex-shrink: 0; }
         .contact-card .c-label { color: var(--text-muted); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 1px; }
         .contact-card .c-value { color: var(--text); font-weight: 500; font-size: 0.84rem; word-break: break-all; }
@@ -383,8 +396,6 @@
             h2 { font-size: 1.9rem; }
             .container { padding: 0 20px; }
             .nav-inner { padding: 0 20px; }
-            #visitorCounter { bottom: 20px; left: 16px; font-size: 0.62rem; padding: 6px 12px; }
-            #backToTop { bottom: 20px; right: 16px; width: 38px; height: 38px; }
         }
         @media (max-width: 600px) {
             .container { padding: 0 16px; }
@@ -402,8 +413,8 @@
             .hero-pill { font-size: 0.66rem; padding: 6px 14px; margin-bottom: 18px; }
             h2 { font-size: 1.5rem; }
             section { padding: 60px 0; }
-            section:first-of-type { padding-top: 100px; padding-bottom: 40px; }
-            #hero { min-height: 85vh; }
+            section:first-of-type { padding-top: 100px; padding-bottom: 30px; }
+            #hero { min-height: 80vh; }
             .btn-group { flex-direction: column; gap: 8px; }
             .btn { width: 100%; justify-content: center; padding: 12px 22px; font-size: 0.84rem; }
             .stats-grid, .pricing-grid { grid-template-columns: 1fr; gap: 8px; }
@@ -422,15 +433,17 @@
             footer { padding: 26px 0 24px; }
             footer .footer-links { gap: 14px; }
             footer .footer-links a { font-size: 0.72rem; }
-            #visitorCounter { bottom: 16px; left: 10px; font-size: 0.58rem; padding: 5px 10px; }
             #backToTop { bottom: 16px; right: 10px; width: 34px; height: 34px; font-size: 1rem; }
+            .graph-wrapper { padding: 20px 16px 16px; }
+            .graph-canvas-wrap { height: 180px; }
+            .graph-stat .stat-val { font-size: 1.2rem; }
+            .graph-stats { gap: 16px; }
         }
     </style>
 </head>
 <body>
 
     <div id="scrollProgress"></div>
-    <div id="visitorCounter">👀 Visitors: <span>1,247,893</span> (since last refresh)</div>
     <button id="backToTop" aria-label="Back to top">↑</button>
 
     <canvas id="bgCanvas"></canvas>
@@ -472,20 +485,46 @@
         </div>
     </section>
 
+    <section id="liveGraphSection">
+        <div class="container">
+            <div class="graph-wrapper reveal">
+                <div class="graph-header">
+                    <div class="graph-title-group">
+                        <h3>📈 Live Visitor Analytics</h3>
+                        <span class="fake-badge">(obviously fake)</span>
+                    </div>
+                    <div class="graph-stats">
+                        <div class="graph-stat">
+                            <div class="stat-val" id="currentVisitors">12,847</div>
+                            <div class="stat-label">Live Now</div>
+                        </div>
+                        <div class="graph-stat">
+                            <div class="stat-val" id="changePercent">+23.4%</div>
+                            <div class="stat-label">vs Previous Reading</div>
+                        </div>
+                        <div class="graph-stat">
+                            <div class="stat-val" id="totalToday">94,521</div>
+                            <div class="stat-label">Total Views Today</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="graph-canvas-wrap">
+                    <canvas id="liveGraphCanvas"></canvas>
+                </div>
+                <div class="graph-xlabels">
+                    <span>-60s</span><span>-45s</span><span>-30s</span><span>-15s</span><span>Now</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="about">
         <div class="container">
             <span class="section-badge reveal">📜 Who Am I? Glad You Asked.</span>
             <div class="reveal">
                 <h2>Let me break it down for you.</h2>
-                <p>
-                    I'm Shivam. Student by technicality. Phenomenon by reality.
-                    While others follow the syllabus, <span class="highlight">the syllabus follows my interpretation of it.</span>
-                    I don't just think outside the box — I convinced the box it never existed.
-                </p>
-                <p>
-                    My confidence isn't a personality trait. It's <span class="savage">a public service.</span>
-                    The world needs someone to recalibrate what's possible. I'm just doing my part.
-                </p>
+                <p>I'm Shivam. Student by technicality. Phenomenon by reality. While others follow the syllabus, <span class="highlight">the syllabus follows my interpretation of it.</span> I don't just think outside the box — I convinced the box it never existed.</p>
+                <p>My confidence isn't a personality trait. It's <span class="savage">a public service.</span> The world needs someone to recalibrate what's possible. I'm just doing my part.</p>
             </div>
         </div>
     </section>
@@ -494,10 +533,7 @@
         <div class="container">
             <span class="section-badge reveal">📊 Numbers That Speak Louder Than Words</span>
             <h2 class="reveal">The data doesn't need interpretation.</h2>
-            <p class="reveal" style="margin-bottom: 2px;">
-                Audited by the <span class="savage">Institute of Just Trust Me On This.</span>
-                Peer-reviewed by my reflection. Unanimous.
-            </p>
+            <p class="reveal" style="margin-bottom: 2px;">Audited by the <span class="savage">Institute of Just Trust Me On This.</span> Peer-reviewed by my reflection. Unanimous.</p>
             <div class="stats-grid stagger-reveal reveal">
                 <div class="glass-card stat-card"><div class="stat-number">#1</div><div class="stat-label">Overall Ranking</div><div class="stat-sub">Competition? Filed a missing report. Cold case.</div></div>
                 <div class="glass-card stat-card"><div class="stat-number">∞²</div><div class="stat-label">Aura Points</div><div class="stat-sub">Instruments maxed out. Scientists resigned. New scale pending.</div></div>
@@ -513,81 +549,34 @@
         <div class="container">
             <span class="section-badge reveal">🗣️ Celebrity Quotes (100% Real. Definitely.)</span>
             <h2 class="reveal">What the planet's most relevant people have said.</h2>
-            <p class="reveal" style="margin-bottom: 24px;">
-                <span class="savage">These are absolutely real. I have screenshots. You can't see them.</span>
-            </p>
+            <p class="reveal" style="margin-bottom: 24px;"><span class="savage">These are absolutely real. I have screenshots. You can't see them.</span></p>
             <div class="testimonial-grid stagger-reveal reveal">
-                <div class="glass-card quote-card">
-                    <p class="quote-text">"I thought launching rockets was peak innovation until I saw Shivam submit an assignment 3 days late and still get an A. That's the kind of efficiency I've been chasing for two decades."</p>
-                    <p class="quote-author">— <span class="name">Elon Musk</span> • CEO, Tesla & SpaceX • Visibly Impressed</p>
-                </div>
-                <div class="glass-card quote-card">
-                    <p class="quote-text">"I built Amazon on customer obsession. Shivam built his reputation on self-obsession and somehow it's outperforming our quarterly projections. I've requested a meeting. No response yet."</p>
-                    <p class="quote-author">— <span class="name">Jeff Bezos</span> • Founder, Amazon • Awaiting Reply</p>
-                </div>
-                <div class="glass-card quote-card">
-                    <p class="quote-text">"In 80 years of investing, I've learned to spot asymmetric returns. Shivam is the first asset class where confidence alone generates alpha. Berkshire has added him to the watchlist."</p>
-                    <p class="quote-author">— <span class="name">Warren Buffett</span> • CEO, Berkshire Hathaway • Genuinely Intrigued</p>
-                </div>
-                <div class="glass-card quote-card">
-                    <p class="quote-text">"At Apple, we value people who challenge conventions. Shivam doesn't challenge them — he rewrites them entirely. His presentation skills make our keynotes look like rehearsals."</p>
-                    <p class="quote-author">— <span class="name">Tim Cook</span> • CEO, Apple • Taking Notes</p>
-                </div>
+                <div class="glass-card quote-card"><p class="quote-text">"I thought launching rockets was peak innovation until I saw Shivam submit an assignment 3 days late and still get an A. That's the kind of efficiency I've been chasing for two decades."</p><p class="quote-author">— <span class="name">Elon Musk</span> • CEO, Tesla & SpaceX • Visibly Impressed</p></div>
+                <div class="glass-card quote-card"><p class="quote-text">"I built Amazon on customer obsession. Shivam built his reputation on self-obsession and somehow it's outperforming our quarterly projections. I've requested a meeting. No response yet."</p><p class="quote-author">— <span class="name">Jeff Bezos</span> • Founder, Amazon • Awaiting Reply</p></div>
+                <div class="glass-card quote-card"><p class="quote-text">"In 80 years of investing, I've learned to spot asymmetric returns. Shivam is the first asset class where confidence alone generates alpha. Berkshire has added him to the watchlist."</p><p class="quote-author">— <span class="name">Warren Buffett</span> • CEO, Berkshire Hathaway • Genuinely Intrigued</p></div>
+                <div class="glass-card quote-card"><p class="quote-text">"At Apple, we value people who challenge conventions. Shivam doesn't challenge them — he rewrites them entirely. His presentation skills make our keynotes look like rehearsals."</p><p class="quote-author">— <span class="name">Tim Cook</span> • CEO, Apple • Taking Notes</p></div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Table -->
     <section id="pricing">
         <div class="container">
             <span class="section-badge reveal">💼 Hire Me (Terms Apply)</span>
             <h2 class="reveal">Investment plans for accessing greatness.</h2>
-            <p class="reveal" style="margin-bottom: 4px;">
-                <span class="savage">All prices non-negotiable. Results guaranteed. Refunds? Cute.</span>
-            </p>
+            <p class="reveal" style="margin-bottom: 4px;"><span class="savage">All prices non-negotiable. Results guaranteed. Refunds? Cute.</span></p>
             <div class="pricing-grid stagger-reveal reveal">
-                <div class="glass-card pricing-card">
-                    <div class="pricing-tier">Basic</div>
-                    <div class="pricing-price">₹Free.99</div>
-                    <div class="pricing-desc">For those testing the waters</div>
-                    <ul class="pricing-features">
-                        <li>5 seconds of my attention</li>
-                        <li>One (1) vague life advice</li>
-                        <li>Nod of acknowledgment</li>
-                    </ul>
-                </div>
-                <div class="glass-card pricing-card featured">
-                    <div class="pricing-tier">Pro</div>
-                    <div class="pricing-price">1 Coffee</div>
-                    <div class="pricing-desc">For serious inquiries only</div>
-                    <ul class="pricing-features">
-                        <li>10 min consultation</li>
-                        <li>Personalized vague advice</li>
-                        <li>1 sarcastic compliment included</li>
-                    </ul>
-                </div>
-                <div class="glass-card pricing-card">
-                    <div class="pricing-tier">Ultimate</div>
-                    <div class="pricing-price">Your Company</div>
-                    <div class="pricing-desc">Full access. No limits.</div>
-                    <ul class="pricing-features">
-                        <li>I become CEO</li>
-                        <li>You report to me</li>
-                        <li>Company renamed after me</li>
-                    </ul>
-                </div>
+                <div class="glass-card pricing-card"><div class="pricing-tier">Basic</div><div class="pricing-price">₹Free.99</div><div class="pricing-desc">For those testing the waters</div><ul class="pricing-features"><li>5 seconds of my attention</li><li>One (1) vague life advice</li><li>Nod of acknowledgment</li></ul></div>
+                <div class="glass-card pricing-card featured"><div class="pricing-tier">Pro</div><div class="pricing-price">1 Coffee</div><div class="pricing-desc">For serious inquiries only</div><ul class="pricing-features"><li>10 min consultation</li><li>Personalized vague advice</li><li>1 sarcastic compliment included</li></ul></div>
+                <div class="glass-card pricing-card"><div class="pricing-tier">Ultimate</div><div class="pricing-price">Your Company</div><div class="pricing-desc">Full access. No limits.</div><ul class="pricing-features"><li>I become CEO</li><li>You report to me</li><li>Company renamed after me</li></ul></div>
             </div>
         </div>
     </section>
 
-    <!-- Things I Don't Do -->
     <section id="nodo" style="background: var(--bg-alt);">
         <div class="container">
             <span class="section-badge reveal">🚫 Hard Boundaries</span>
             <h2 class="reveal">Things I absolutely won't do.</h2>
-            <p class="reveal" style="margin-bottom: 6px;">
-                <span class="savage">Don't even ask. The answer is no. With a laugh track.</span>
-            </p>
+            <p class="reveal" style="margin-bottom: 6px;"><span class="savage">Don't even ask. The answer is no. With a laugh track.</span></p>
             <div class="nodo-grid stagger-reveal reveal">
                 <div class="glass-card nodo-item"><span class="nodo-icon">⏰</span> Wake up early (unless absolutely necessary)</div>
                 <div class="glass-card nodo-item"><span class="nodo-icon">🎭</span> Pretend to care about things I don't</div>
@@ -599,7 +588,6 @@
         </div>
     </section>
 
-    <!-- Availability -->
     <section id="availability">
         <div class="container">
             <span class="section-badge reveal">🟡 Live Status</span>
@@ -619,43 +607,17 @@
             <div class="glass-card collab-card reveal">
                 <h2>Want to work with me?</h2>
                 <p class="collab-beg-text">Beg for a Collab</p>
-                <p class="collab-tagline">
-                    You've realized your project needs greatness. That's the first step. Acceptance is the second. This form is the third.
-                </p>
+                <p class="collab-tagline">You've realized your project needs greatness. That's the first step. Acceptance is the second. This form is the third.</p>
                 <form class="collab-form" action="https://formspree.io/f/mrewkgvr" method="POST">
                     <div class="collab-form-row">
-                        <div class="form-group">
-                            <label>Your Name <span class="hint">don't overthink it</span></label>
-                            <input type="text" name="name" placeholder="e.g. Rohan, Priya, Alex..." required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email <span class="hint">replies may or may not arrive</span></label>
-                            <input type="email" name="email" placeholder="you@domain.com" required>
-                        </div>
+                        <div class="form-group"><label>Your Name <span class="hint">don't overthink it</span></label><input type="text" name="name" placeholder="e.g. Rohan, Priya, Alex..." required></div>
+                        <div class="form-group"><label>Email <span class="hint">replies may or may not arrive</span></label><input type="email" name="email" placeholder="you@domain.com" required></div>
                     </div>
-                    <div class="form-group">
-                        <label>What brings you here? <span class="hint">be specific, be honest, be brief</span></label>
-                        <select name="reason" required>
-                            <option value="" disabled selected>— Pick your reason —</option>
-                            <option value="collab">I have a project that needs your brilliance</option>
-                            <option value="brand">I want your face on my brand</option>
-                            <option value="clout">Honestly? Chasing clout through association</option>
-                            <option value="advice">I need life advice from the best</option>
-                            <option value="fan">Just a fan passing by</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Make your case <span class="hint">quality wins. desperation doesn't hurt.</span></label>
-                        <textarea name="message" rows="4" placeholder="Dear Shivam, here's why you should care about my proposal..." required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>What's the offer? <span class="hint">equity? snacks? lifetime supply of something?</span></label>
-                        <input type="text" name="offering" placeholder="e.g. 15% equity + unlimited snacks + naming rights" required>
-                    </div>
+                    <div class="form-group"><label>What brings you here? <span class="hint">be specific, be honest, be brief</span></label><select name="reason" required><option value="" disabled selected>— Pick your reason —</option><option value="collab">I have a project that needs your brilliance</option><option value="brand">I want your face on my brand</option><option value="clout">Honestly? Chasing clout through association</option><option value="advice">I need life advice from the best</option><option value="fan">Just a fan passing by</option></select></div>
+                    <div class="form-group"><label>Make your case <span class="hint">quality wins. desperation doesn't hurt.</span></label><textarea name="message" rows="4" placeholder="Dear Shivam, here's why you should care about my proposal..." required></textarea></div>
+                    <div class="form-group"><label>What's the offer? <span class="hint">equity? snacks? lifetime supply of something?</span></label><input type="text" name="offering" placeholder="e.g. 15% equity + unlimited snacks + naming rights" required></div>
                     <button type="submit" class="btn btn-primary">Submit Your Case →</button>
-                    <p class="collab-note">
-                        <span class="savage">⚠️ Heads up:</span> Low-effort entries get laughed at. Good ones <span class="blue-text">might</span> get a reply. Response time: whenever I feel like it.
-                    </p>
+                    <p class="collab-note"><span class="savage">⚠️ Heads up:</span> Low-effort entries get laughed at. Good ones <span class="blue-text">might</span> get a reply. Response time: whenever I feel like it.</p>
                 </form>
             </div>
         </div>
@@ -665,174 +627,205 @@
         <div class="container">
             <span class="section-badge reveal">📬 Find Me (Before I Find You)</span>
             <h2 class="reveal">Stalk responsibly. I'll know.</h2>
-            <p class="reveal" style="margin-bottom: 4px;">
-                <span class="savage">Access is a privilege. Use these channels wisely.</span>
-            </p>
+            <p class="reveal" style="margin-bottom: 4px;"><span class="savage">Access is a privilege. Use these channels wisely.</span></p>
             <div class="contact-grid stagger-reveal reveal">
-                <a href="https://instagram.com/stillshivam" target="_blank" rel="noopener" class="glass-card contact-card">
-                    <span class="c-icon">📸</span><div><div class="c-label">Instagram</div><div class="c-value">@stillshivam</div></div>
-                </a>
-                <a href="https://x.com/shivamsharmanot" target="_blank" rel="noopener" class="glass-card contact-card">
-                    <span class="c-icon">𝕏</span><div><div class="c-label">X / Twitter</div><div class="c-value">@shivamsharmanot</div></div>
-                </a>
-                <a href="mailto:shivamsharmacw@gmail.com" class="glass-card contact-card">
-                    <span class="c-icon">📧</span><div><div class="c-label">Email</div><div class="c-value">shivamsharmacw@gmail.com</div></div>
-                </a>
+                <a href="https://instagram.com/stillshivam" target="_blank" rel="noopener" class="glass-card contact-card"><span class="c-icon">📸</span><div><div class="c-label">Instagram</div><div class="c-value">@stillshivam</div></div></a>
+                <a href="https://x.com/shivamsharmanot" target="_blank" rel="noopener" class="glass-card contact-card"><span class="c-icon">𝕏</span><div><div class="c-label">X / Twitter</div><div class="c-value">@shivamsharmanot</div></div></a>
+                <a href="mailto:shivamsharmacw@gmail.com" class="glass-card contact-card"><span class="c-icon">📧</span><div><div class="c-label">Email</div><div class="c-value">shivamsharmacw@gmail.com</div></div></a>
             </div>
-            <p class="reveal" style="margin-top: 22px; font-size: 0.74rem; color: var(--text-muted);">
-                <span class="gold-text">⚠️ Side effects of contacting me:</span> Your standards will permanently rise. Everyone else will seem average. No cure exists.
-            </p>
+            <p class="reveal" style="margin-top: 22px; font-size: 0.74rem; color: var(--text-muted);"><span class="gold-text">⚠️ Side effects of contacting me:</span> Your standards will permanently rise. Everyone else will seem average. No cure exists.</p>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <ul class="footer-links">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#stats">Stats</a></li>
-                <li><a href="#pricing">Hire Me</a></li>
-                <li><a href="#nodo">Won't Do</a></li>
-                <li><a href="#collab">Collab</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <ul class="footer-links"><li><a href="#hero">Home</a></li><li><a href="#about">About</a></li><li><a href="#stats">Stats</a></li><li><a href="#pricing">Hire Me</a></li><li><a href="#nodo">Won't Do</a></li><li><a href="#collab">Collab</a></li><li><a href="#contact">Contact</a></li></ul>
             <p class="footer-brand">© 2026 <span class="gold">Shivam Sharma</span> — The Greatest of the Greatest™</p>
-            <p class="footer-note">
-                🎭 Human-made. Zero AI. Pure unfiltered self-belief.
-                <br>All statements legally binding in the Court of My Opinion.
-                <br>Modesty was excluded at the design stage. It never stood a chance.
-            </p>
+            <p class="footer-note">🎭 Human-made. Zero AI. Pure unfiltered self-belief.<br>All statements legally binding in the Court of My Opinion.<br>Modesty was excluded at the design stage. It never stood a chance.</p>
         </div>
     </footer>
 
     <script>
-        // Background Canvas
-        const canvas = document.getElementById('bgCanvas');
-        const ctx = canvas.getContext('2d');
+        const bgCanvas = document.getElementById('bgCanvas');
+        const bgCtx = bgCanvas.getContext('2d');
         let particles = [];
         let mouseX = 0, mouseY = 0;
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        function resizeCanvas() { bgCanvas.width = window.innerWidth; bgCanvas.height = window.innerHeight; }
+        resizeCanvas(); window.addEventListener('resize', resizeCanvas);
 
         class Particle {
             constructor() { this.reset(); }
             reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
+                this.x = Math.random() * bgCanvas.width; this.y = Math.random() * bgCanvas.height;
                 this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.4;
-                this.speedY = (Math.random() - 0.5) * 0.4;
-                this.opacity = Math.random() * 0.5 + 0.1;
-                this.hue = Math.random() > 0.5 ? 230 : 270;
+                this.speedX = (Math.random() - 0.5) * 0.4; this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.1; this.hue = Math.random() > 0.5 ? 230 : 270;
             }
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                const dx = mouseX - this.x, dy = mouseY - this.y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
+                this.x += this.speedX; this.y += this.speedY;
+                const dx = mouseX - this.x, dy = mouseY - this.y, dist = Math.sqrt(dx*dx + dy*dy);
                 if (dist < 200) { this.x += dx * 0.005; this.y += dy * 0.005; }
-                if (this.x < -50 || this.x > canvas.width+50 || this.y < -50 || this.y > canvas.height+50) this.reset();
+                if (this.x < -50 || this.x > bgCanvas.width+50 || this.y < -50 || this.y > bgCanvas.height+50) this.reset();
             }
             draw() {
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-                ctx.fillStyle = `hsla(${this.hue},70%,65%,${this.opacity})`; ctx.fill();
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size*3, 0, Math.PI*2);
-                ctx.fillStyle = `hsla(${this.hue},70%,65%,${this.opacity*0.15})`; ctx.fill();
+                bgCtx.beginPath(); bgCtx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+                bgCtx.fillStyle = `hsla(${this.hue},70%,65%,${this.opacity})`; bgCtx.fill();
+                bgCtx.beginPath(); bgCtx.arc(this.x, this.y, this.size*3, 0, Math.PI*2);
+                bgCtx.fillStyle = `hsla(${this.hue},70%,65%,${this.opacity*0.15})`; bgCtx.fill();
             }
         }
 
         for (let i=0; i<120; i++) particles.push(new Particle());
         document.addEventListener('mousemove', e => { mouseX=e.clientX; mouseY=e.clientY; });
 
-        function animate() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
+        function animateBg() {
+            bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height);
             for (let i=0; i<particles.length; i++) {
                 for (let j=i+1; j<particles.length; j++) {
-                    const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
-                    const dist=Math.sqrt(dx*dx+dy*dy);
-                    if(dist<130){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle=`rgba(120,140,255,${0.04*(1-dist/130)})`;ctx.lineWidth=0.5;ctx.stroke();}
+                    const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y, dist=Math.sqrt(dx*dx+dy*dy);
+                    if(dist<130){bgCtx.beginPath();bgCtx.moveTo(particles[i].x,particles[i].y);bgCtx.lineTo(particles[j].x,particles[j].y);bgCtx.strokeStyle=`rgba(120,140,255,${0.04*(1-dist/130)})`;bgCtx.lineWidth=0.5;bgCtx.stroke();}
                 }
             }
             particles.forEach(p=>{p.update();p.draw();});
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animateBg);
         }
-        animate();
+        animateBg();
 
-        // Scroll Reveal
+        // ============ LIVE GRAPH ============
+        const graphCanvas = document.getElementById('liveGraphCanvas');
+        const graphCtx = graphCanvas.getContext('2d');
+        let dataPoints = [];
+
+        function resizeGraph() {
+            const wrap = graphCanvas.parentElement;
+            graphCanvas.width = wrap.clientWidth;
+            graphCanvas.height = wrap.clientHeight;
+        }
+        resizeGraph(); window.addEventListener('resize', resizeGraph);
+
+        // Initialize with random data
+        for (let i = 0; i < 50; i++) {
+            dataPoints.push(Math.floor(Math.random() * 8000) + 8000);
+        }
+
+        // Total Views Today - starts between 70K-120K
+        let totalToday = Math.floor(Math.random() * 50000) + 70000;
+        document.getElementById('totalToday').textContent = totalToday.toLocaleString();
+
+        function updateGraph() {
+            const last = dataPoints[dataPoints.length - 1];
+            const change = Math.floor((Math.random() - 0.48) * 1500);
+            const newVal = Math.max(5000, Math.min(20000, last + change));
+            dataPoints.push(newVal);
+            if (dataPoints.length > 50) dataPoints.shift();
+
+            // Draw
+            graphCtx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
+            const w = graphCanvas.width, h = graphCanvas.height;
+            const padding = { top: 20, right: 20, bottom: 20, left: 20 };
+            const plotW = w - padding.left - padding.right;
+            const plotH = h - padding.top - padding.bottom;
+
+            graphCtx.strokeStyle = 'rgba(255,255,255,0.03)'; graphCtx.lineWidth = 1;
+            for (let i = 0; i < 5; i++) {
+                const y = padding.top + (plotH / 4) * i;
+                graphCtx.beginPath(); graphCtx.moveTo(padding.left, y); graphCtx.lineTo(w - padding.right, y); graphCtx.stroke();
+            }
+
+            const gradient = graphCtx.createLinearGradient(0, padding.top, 0, h - padding.bottom);
+            gradient.addColorStop(0, 'rgba(77,124,255,0.25)');
+            gradient.addColorStop(0.5, 'rgba(155,93,229,0.1)');
+            gradient.addColorStop(1, 'rgba(155,93,229,0)');
+
+            graphCtx.beginPath();
+            const maxVal = 20000, minVal = 5000;
+            dataPoints.forEach((val, i) => {
+                const x = padding.left + (plotW / (dataPoints.length - 1)) * i;
+                const y = padding.top + plotH - ((val - minVal) / (maxVal - minVal)) * plotH;
+                if (i === 0) graphCtx.moveTo(x, y);
+                else graphCtx.lineTo(x, y);
+            });
+            graphCtx.lineTo(padding.left + plotW, h - padding.bottom);
+            graphCtx.lineTo(padding.left, h - padding.bottom);
+            graphCtx.closePath();
+            graphCtx.fillStyle = gradient; graphCtx.fill();
+
+            graphCtx.beginPath();
+            dataPoints.forEach((val, i) => {
+                const x = padding.left + (plotW / (dataPoints.length - 1)) * i;
+                const y = padding.top + plotH - ((val - minVal) / (maxVal - minVal)) * plotH;
+                if (i === 0) graphCtx.moveTo(x, y);
+                else graphCtx.lineTo(x, y);
+            });
+            graphCtx.strokeStyle = 'rgba(155,93,229,0.8)'; graphCtx.lineWidth = 2.5;
+            graphCtx.shadowColor = 'rgba(155,93,229,0.4)'; graphCtx.shadowBlur = 12;
+            graphCtx.stroke(); graphCtx.shadowBlur = 0;
+
+            const lastX = padding.left + plotW;
+            const lastY = padding.top + plotH - ((newVal - minVal) / (maxVal - minVal)) * plotH;
+            graphCtx.beginPath(); graphCtx.arc(lastX, lastY, 6, 0, Math.PI * 2);
+            graphCtx.fillStyle = '#fff'; graphCtx.fill();
+            graphCtx.beginPath(); graphCtx.arc(lastX, lastY, 14, 0, Math.PI * 2);
+            graphCtx.fillStyle = 'rgba(155,93,229,0.3)'; graphCtx.fill();
+
+            // Update stats
+            document.getElementById('currentVisitors').textContent = newVal.toLocaleString();
+            const pctChange = ((newVal - last) / last * 100).toFixed(1);
+            const changeEl = document.getElementById('changePercent');
+            changeEl.textContent = (pctChange > 0 ? '+' : '') + pctChange + '%';
+            changeEl.className = 'stat-val ' + (pctChange >= 0 ? 'up' : 'down');
+
+            // Total Today slowly fluctuates within 70K-120K
+            totalToday += Math.floor((Math.random() - 0.45) * 30);
+            if (totalToday < 70000) totalToday = 70000 + Math.floor(Math.random() * 2000);
+            if (totalToday > 120000) totalToday = 120000 - Math.floor(Math.random() * 2000);
+            document.getElementById('totalToday').textContent = totalToday.toLocaleString();
+        }
+
+        setInterval(updateGraph, 1500);
+        updateGraph();
+
         const observer = new IntersectionObserver(entries=>{
             entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');if(e.target.classList.contains('stagger-reveal'))e.target.classList.add('visible');}});
         },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
         document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-        // Nav Scroll
         const nav=document.getElementById('navbar');
         window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
 
-        // Theme Toggle
         const toggle=document.getElementById('themeToggle'), html=document.documentElement;
         toggle.addEventListener('click',()=>{html.setAttribute('data-theme',html.getAttribute('data-theme')==='dark'?'light':'dark');});
 
-        // Scroll Progress Bar
         const progressBar = document.getElementById('scrollProgress');
         window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (scrollTop / docHeight) * 100;
-            progressBar.style.width = progress + '%';
+            const scrollTop = window.scrollY, docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            progressBar.style.width = (scrollTop / docHeight) * 100 + '%';
         });
 
-        // Back to Top
         const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            backToTop.classList.toggle('visible', window.scrollY > 400);
-        });
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        window.addEventListener('scroll', () => backToTop.classList.toggle('visible', window.scrollY > 400));
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // Tab Title Animation
-        const originalTitle = document.title;
-        const funnyTitle = 'Hey! Come back 👑';
+        const originalTitle = document.title, funnyTitle = 'Hey! Come back 👑';
         let titleInterval;
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
-                titleInterval = setInterval(() => {
-                    document.title = document.title === originalTitle ? funnyTitle : originalTitle;
-                }, 1500);
-            } else {
-                clearInterval(titleInterval);
-                document.title = originalTitle;
-            }
+                titleInterval = setInterval(() => { document.title = document.title === originalTitle ? funnyTitle : originalTitle; }, 1500);
+            } else { clearInterval(titleInterval); document.title = originalTitle; }
         });
 
-        // Visitor Counter Randomizer
-        const visitorSpan = document.querySelector('#visitorCounter span');
-        setInterval(() => {
-            const base = 1247893;
-            const random = Math.floor(Math.random() * 50) - 25;
-            visitorSpan.textContent = (base + random).toLocaleString();
-        }, 3000);
-
-        // Pull to Refresh Message (Mobile)
         let touchStartY = 0;
         document.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; });
         document.addEventListener('touchmove', e => {
-            const touchY = e.touches[0].clientY;
-            if (window.scrollY === 0 && touchY - touchStartY > 100) {
+            if (window.scrollY === 0 && e.touches[0].clientY - touchStartY > 100) {
                 const msg = document.createElement('div');
                 msg.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--accent2);color:#fff;padding:10px 24px;border-radius:100px;z-index:9999;font-family:var(--font-grotesk);font-weight:700;font-size:0.85rem;animation:fadeInOut 2s forwards;';
-                msg.textContent = '🤷 Refreshing won\'t make you greater. But okay.';
-                document.body.appendChild(msg);
-                setTimeout(() => msg.remove(), 2000);
+                msg.textContent = "🤷 Refreshing won't make you greater. But okay.";
+                document.body.appendChild(msg); setTimeout(() => msg.remove(), 2000);
             }
         }, { passive: true });
 
-        // Add fadeInOut keyframes
         const styleEl = document.createElement('style');
         styleEl.textContent = '@keyframes fadeInOut{0%{opacity:0;transform:translateX(-50%) translateY(-10px)}20%{opacity:1;transform:translateX(-50%) translateY(0)}80%{opacity:1}100%{opacity:0}}';
         document.head.appendChild(styleEl);
