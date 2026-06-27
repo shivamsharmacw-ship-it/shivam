@@ -1,1309 +1,684 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shivam Sharma — The Greatest of the Greatest of the Greatest</title>
+    <title>Shivam Sharma — The Greatest of the Greatest</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ============ RESET & BASE ============ */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg: #030305;
-            --bg-alt: #08080f;
-            --surface: #0d0d1a;
-            --surface-hover: #13132a;
-            --text: #ededf5;
-            --text-secondary: #a0a0b8;
-            --text-muted: #5e5e78;
-            --accent: #ff4d1c;
-            --accent-light: #ff6b42;
-            --accent-glow: rgba(255, 77, 28, 0.35);
-            --gold: #f0b933;
-            --gold-light: #f5c542;
-            --gold-glow: rgba(240, 185, 51, 0.3);
-            --border: #1a1a30;
-            --border-light: #252540;
+            --bg: #050510;
+            --bg-alt: #08081a;
+            --glass-bg: rgba(255, 255, 255, 0.015);
+            --glass-border: rgba(255, 255, 255, 0.04);
+            --glass-hover: rgba(255, 255, 255, 0.03);
+            --text: #e8e6f5;
+            --text-secondary: #a09db8;
+            --text-muted: #545170;
+            --accent: #4d7cff;
+            --accent-soft: rgba(77, 124, 255, 0.1);
+            --accent2: #9b5de5;
+            --accent2-soft: rgba(155, 93, 229, 0.1);
+            --gold: #f5e642;
+            --gold-soft: rgba(245, 230, 66, 0.08);
             --radius-sm: 10px;
             --radius: 16px;
-            --radius-lg: 20px;
-            --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-            --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --radius-lg: 22px;
+            --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --font-grotesk: 'Space Grotesk', sans-serif;
+            --blur: blur(20px);
+            --nav-blur: blur(30px);
+            --dropdown-bg: #0d0d24;
+            --dropdown-text: #d0cdf0;
+            --input-bg: rgba(255,255,255,0.015);
         }
 
-        html {
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+        [data-theme="light"] {
+            --bg: #f6f5fc;
+            --bg-alt: #eeecf7;
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(0, 0, 0, 0.04);
+            --glass-hover: rgba(255, 255, 255, 0.7);
+            --text: #0f0d1e;
+            --text-secondary: #44405a;
+            --text-muted: #6e6a85;
+            --accent: #3b5fd9;
+            --accent-soft: rgba(59, 95, 217, 0.06);
+            --accent2: #7b3fc7;
+            --accent2-soft: rgba(123, 63, 199, 0.06);
+            --gold: #c8a818;
+            --gold-soft: rgba(200, 168, 24, 0.06);
+            --dropdown-bg: #ffffff;
+            --dropdown-text: #0f0d1e;
+            --input-bg: rgba(0,0,0,0.01);
         }
 
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
         body {
             font-family: var(--font-sans);
-            background-color: var(--bg);
+            background: var(--bg);
             color: var(--text);
             line-height: 1.7;
             overflow-x: hidden;
+            transition: background 0.6s ease, color 0.6s ease;
         }
 
-        /* ============ SCROLLBAR ============ */
-        ::-webkit-scrollbar { width: 5px; }
+        /* Animated Background Canvas */
+        #bgCanvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none; opacity: 0.5;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #1a1a30; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.04); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-        /* ============ REVEAL ON SCROLL ============ */
         .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0; transform: translateY(60px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* ============ CONTAINER ============ */
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0 36px;
-        }
+        /* Staggered children reveal */
+        .stagger-reveal > * { opacity: 0; transform: translateY(40px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        .stagger-reveal.visible > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
+        .stagger-reveal.visible > *:nth-child(2) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+        .stagger-reveal.visible > *:nth-child(3) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+        .stagger-reveal.visible > *:nth-child(4) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+        .stagger-reveal.visible > *:nth-child(5) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+        .stagger-reveal.visible > *:nth-child(6) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
 
-        /* ============ NAVIGATION ============ */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+
+        /* Nav */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            padding: 0;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         nav.scrolled {
-            background: rgba(3, 3, 5, 0.85);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: var(--glass-bg); backdrop-filter: var(--nav-blur);
+            -webkit-backdrop-filter: var(--nav-blur);
+            border-bottom: 1px solid var(--glass-border);
         }
         .nav-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 72px;
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0 36px;
+            display: flex; justify-content: space-between; align-items: center;
+            height: 66px; max-width: 1000px; margin: 0 auto; padding: 0 32px; gap: 20px;
         }
         .nav-logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 40%, var(--gold) 70%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            transition: all 0.3s;
+            font-family: var(--font-grotesk); font-weight: 700; font-size: 1.3rem;
+            letter-spacing: -0.4px; text-decoration: none; white-space: nowrap;
+            background: linear-gradient(135deg, var(--text) 0%, var(--accent2) 40%, var(--accent) 80%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        .nav-logo:hover { 
-            filter: brightness(1.2);
-            transform: scale(1.02);
-        }
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-            align-items: center;
-        }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-links { display: flex; gap: 24px; list-style: none; align-items: center; }
         .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.25s;
-            position: relative;
-            padding: 8px 0;
-            letter-spacing: -0.1px;
+            color: var(--text-secondary); text-decoration: none; font-size: 0.83rem;
+            font-weight: 500; transition: color 0.3s; padding: 6px 0; white-space: nowrap;
         }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 4px;
-            left: 0;
-            width: 0;
-            height: 1.5px;
-            background: var(--accent);
-            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            border-radius: 1px;
-        }
-        .nav-links a:hover { 
-            color: #ffffff; 
-        }
-        .nav-links a:hover::after { 
-            width: 100%; 
-        }
+        .nav-links a:hover { color: var(--accent); }
 
-        /* ============ SECTION STYLING ============ */
-        section {
-            padding: 120px 0;
-            position: relative;
+        .theme-toggle {
+            width: 48px; height: 26px; border-radius: 100px; cursor: pointer;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            position: relative; transition: all 0.35s; flex-shrink: 0;
         }
-        section:first-of-type {
-            padding-top: 160px;
+        .theme-toggle::after {
+            content: ''; position: absolute; top: 3px; left: 3px;
+            width: 18px; height: 18px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .section-label {
-            display: inline-block;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.25em;
-            color: var(--accent);
-            margin-bottom: 24px;
-            font-weight: 600;
-            font-family: var(--font-mono);
-            background: rgba(255, 77, 28, 0.08);
-            padding: 8px 16px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 77, 28, 0.15);
+        [data-theme="light"] .theme-toggle::after { left: 25px; }
+
+        /* Sections */
+        section { padding: 100px 0; position: relative; }
+        section:first-of-type { padding-top: 150px; }
+        .section-badge {
+            display: inline-block; font-size: 0.66rem; text-transform: uppercase;
+            letter-spacing: 0.2em; font-weight: 700; font-family: var(--font-mono);
+            padding: 9px 18px; border-radius: 100px; margin-bottom: 22px;
+            background: var(--accent-soft); color: var(--accent);
+            border: 1px solid rgba(77,124,255,0.15);
         }
         h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 32px;
-            line-height: 1.1;
-            color: #ffffff;
-            font-family: var(--font-sans);
+            font-size: 2.8rem; font-weight: 800; letter-spacing: -0.8px;
+            margin-bottom: 20px; line-height: 1.06; color: var(--text);
+            font-family: var(--font-grotesk);
         }
-        p {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            margin-bottom: 20px;
-            line-height: 1.75;
-        }
-        .highlight { 
-            color: #ffffff; 
-            font-weight: 600; 
-        }
-        .savage { 
-            color: var(--accent); 
-            font-weight: 600; 
-            font-style: italic; 
-        }
-        .gold-text { 
-            color: var(--gold); 
-            font-weight: 600; 
-        }
+        p { color: var(--text-secondary); font-size: 1rem; margin-bottom: 16px; line-height: 1.75; }
+        .highlight { color: var(--text); font-weight: 600; }
+        .savage { color: var(--accent2); font-weight: 700; }
+        .blue-text { color: var(--accent); font-weight: 600; }
+        .gold-text { color: var(--gold); font-weight: 600; }
 
-        /* ============ HERO ============ */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 100px;
+        /* Glass Card */
+        .glass-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+            border-radius: var(--radius); transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        #hero::before {
-            content: '';
-            position: absolute;
-            top: 40%;
-            right: -15%;
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(255, 77, 28, 0.12) 0%, transparent 65%);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: breathe 6s ease-in-out infinite;
+        .glass-card:hover {
+            background: var(--glass-hover); border-color: rgba(255,255,255,0.08);
+            transform: translateY(-3px); box-shadow: 0 20px 60px rgba(0,0,0,0.4);
         }
-        #hero::after {
-            content: '';
-            position: absolute;
-            bottom: 5%;
-            left: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(240, 185, 51, 0.08) 0%, transparent 65%);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: breathe 7s ease-in-out infinite 1.5s;
+        [data-theme="light"] .glass-card:hover { box-shadow: 0 20px 50px rgba(0,0,0,0.06); }
+
+        /* Hero */
+        #hero { min-height: 100vh; display: flex; align-items: center; }
+        .hero-content { max-width: 680px; }
+        .hero-pill {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--accent-soft); border: 1px solid rgba(77,124,255,0.2);
+            border-radius: 100px; padding: 9px 20px; font-size: 0.76rem;
+            color: var(--accent); margin-bottom: 30px; font-weight: 600;
+            font-family: var(--font-mono); letter-spacing: 0.03em;
         }
-        @keyframes breathe {
-            0%, 100% { 
-                opacity: 0.5; 
-                transform: scale(1); 
-            }
-            50% { 
-                opacity: 0.8; 
-                transform: scale(1.1); 
-            }
+        .hero-pill .dot {
+            width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+            animation: pulse-dot 2s infinite; box-shadow: 0 0 12px var(--accent);
         }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 650px;
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(2.5); }
         }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 100px;
-            padding: 10px 22px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 36px;
-            font-weight: 500;
-            font-family: var(--font-mono);
-            letter-spacing: 0.03em;
-            transition: all 0.3s;
-            backdrop-filter: blur(10px);
-        }
-        .hero-badge:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.05);
-            color: #ffffff;
-        }
-        .hero-badge .crown {
-            font-size: 1.1rem;
-            animation: float-crown 3s ease-in-out infinite;
-        }
-        @keyframes float-crown {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-4px) rotate(-5deg); }
-            75% { transform: translateY(-4px) rotate(5deg); }
-        }
-        .hero-title {
-            font-size: 4.8rem;
-            font-weight: 900;
-            letter-spacing: -1.8px;
-            line-height: 1.02;
-            margin-bottom: 28px;
-            font-family: var(--font-sans);
-        }
+        .hero-title { font-size: 4.6rem; font-weight: 900; letter-spacing: -2px; line-height: 0.94; margin-bottom: 22px; font-family: var(--font-grotesk); }
         .hero-title .name-line {
             display: block;
-            background: linear-gradient(135deg, #ffffff 0%, #e8c876 50%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent2) 30%, var(--accent) 70%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
         .hero-title .subtitle-line {
-            display: block;
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-            margin-top: 12px;
-            font-family: var(--font-mono);
-            -webkit-text-fill-color: var(--text-muted);
-            background: none;
+            display: block; font-size: 1.15rem; font-weight: 500; color: var(--text-muted);
+            letter-spacing: 0.05em; margin-top: 10px; font-family: var(--font-mono);
+            -webkit-text-fill-color: var(--text-muted); background: none;
         }
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 44px;
-            line-height: 1.7;
-            font-weight: 400;
-        }
-        .btn-group {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
+        .hero-subtitle { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 38px; line-height: 1.7; max-width: 560px; }
+        .btn-group { display: flex; gap: 14px; flex-wrap: wrap; }
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--accent);
-            color: #ffffff;
-            padding: 16px 34px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            border: none;
-            cursor: pointer;
-            letter-spacing: -0.2px;
-            position: relative;
-            overflow: hidden;
-            white-space: nowrap;
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 15px 32px; border-radius: 100px; text-decoration: none;
+            font-weight: 600; font-size: 0.92rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none; cursor: pointer; letter-spacing: -0.1px; white-space: nowrap;
+            font-family: var(--font-grotesk); position: relative; overflow: hidden;
         }
-        .btn::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
         }
-        .btn:hover::after {
-            transform: translateX(100%);
+        .btn-primary::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+            transform: translateX(-100%); transition: transform 0.6s;
         }
-        .btn:hover {
-            box-shadow: 0 8px 40px rgba(255, 77, 28, 0.35);
-            transform: translateY(-2px);
-        }
+        .btn-primary:hover::after { transform: translateX(100%); }
+        .btn-primary:hover { box-shadow: 0 12px 45px rgba(77,124,255,0.4); transform: translateY(-3px); }
         .btn-outline {
-            background: transparent;
-            color: var(--text);
-            border: 1.5px solid var(--border-light);
+            background: transparent; color: var(--text); border: 1.5px solid var(--glass-border);
         }
-        .btn-outline:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(255, 77, 28, 0.05);
-            box-shadow: 0 8px 30px rgba(255, 77, 28, 0.15);
-        }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
 
-        /* ============ ABOUT ============ */
-        #about {
-            background: var(--bg-alt);
+        /* About */
+        #about { background: var(--bg-alt); transition: background 0.6s; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+        .about-box { padding: 30px; }
+        .about-box h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 14px; color: var(--text); font-family: var(--font-grotesk); }
+        .status-list { list-style: none; }
+        .status-list li {
+            padding: 11px 0; color: var(--text-secondary); border-bottom: 1px solid var(--glass-border);
+            font-size: 0.9rem; display: flex; align-items: center; gap: 10px;
         }
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-        .about-text p:last-child {
-            margin-bottom: 0;
-        }
-        .about-highlight-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 32px;
-            position: relative;
-            overflow: hidden;
-        }
-        .about-highlight-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 70%, rgba(255, 77, 28, 0.06) 0%, transparent 50%);
-            pointer-events: none;
-        }
-        .about-highlight-box h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: #ffffff;
-            position: relative;
-        }
-        .about-highlight-box ul {
-            list-style: none;
-            position: relative;
-        }
-        .about-highlight-box ul li {
-            padding: 10px 0;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--border);
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .about-highlight-box ul li:last-child {
-            border-bottom: none;
-        }
-        .about-highlight-box ul li .icon {
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
+        .status-list li:last-child { border-bottom: none; }
+        .status-list li .s-icon { font-size: 1.1rem; flex-shrink: 0; }
 
-        /* ============ BRAG SECTION ============ */
-        .brag-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 24px;
+        /* Stats */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 14px; }
+        .stat-card { padding: 30px 24px; text-align: left; }
+        .stat-number {
+            font-size: 2.6rem; font-weight: 900; letter-spacing: -0.8px; line-height: 1;
+            margin-bottom: 10px; font-family: var(--font-grotesk);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 80%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        .brag-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 36px 28px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-            cursor: default;
-        }
-        .brag-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        .brag-card:hover {
-            border-color: var(--accent);
-            background: var(--surface-hover);
-            transform: translateY(-8px);
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 77, 28, 0.06);
-        }
-        .brag-card:hover::before {
-            opacity: 1;
-        }
-        .brag-card .brag-number {
-            font-size: 3rem;
-            font-weight: 900;
-            letter-spacing: -1px;
-            line-height: 1;
-            margin-bottom: 14px;
-            font-family: var(--font-mono);
-            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .brag-card .brag-label {
-            font-size: 1.05rem;
-            color: #ffffff;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-        .brag-card .brag-sub {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            font-style: italic;
-        }
+        .stat-label { font-size: 0.92rem; color: var(--text); font-weight: 700; margin-bottom: 3px; }
+        .stat-sub { font-size: 0.76rem; color: var(--text-muted); line-height: 1.5; }
 
-        /* ============ TESTIMONIALS ============ */
-        #testimonials {
-            background: var(--bg-alt);
-        }
-        .testimonial-grid {
-            display: grid;
-            gap: 16px;
-        }
-        .quote-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 38px 42px;
-            position: relative;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
-        }
-        .quote-card:hover {
-            border-color: var(--accent);
-            background: var(--surface-hover);
-            transform: translateX(4px);
-        }
+        /* Testimonials */
+        #testimonials { background: var(--bg-alt); transition: background 0.6s; }
+        .testimonial-grid { display: grid; gap: 14px; }
+        .quote-card { padding: 30px 34px; position: relative; }
         .quote-card::before {
-            content: '"';
-            position: absolute;
-            top: -30px;
-            left: 32px;
-            font-size: 8rem;
-            font-family: var(--font-display);
-            color: var(--accent);
-            opacity: 0.08;
-            line-height: 1;
-            pointer-events: none;
-            transition: all 0.3s;
+            content: '"'; position: absolute; top: -16px; left: 22px; font-size: 5rem;
+            font-family: 'Playfair Display', Georgia, serif; color: var(--accent2); opacity: 0.04;
+            line-height: 1; pointer-events: none;
         }
-        .quote-card:hover::before {
-            opacity: 0.15;
-            transform: scale(1.05);
-        }
-        .quote-text {
-            font-size: 1.1rem;
-            color: var(--text);
-            font-style: italic;
-            margin-bottom: 18px;
-            position: relative;
-            z-index: 1;
-            line-height: 1.7;
-            font-family: var(--font-sans);
-            font-weight: 400;
-        }
-        .quote-author {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-family: var(--font-mono);
-            position: relative;
-            z-index: 1;
-        }
-        .quote-author .name { 
-            color: var(--gold); 
-            font-weight: 600; 
-        }
+        .quote-text { font-size: 0.96rem; color: var(--text); margin-bottom: 14px; position: relative; z-index: 1; line-height: 1.7; }
+        .quote-author { color: var(--text-muted); font-size: 0.8rem; font-family: var(--font-mono); position: relative; z-index: 1; }
+        .quote-author .name { color: var(--accent); font-weight: 700; }
 
-        /* ============ BEG FOR COLLAB ============ */
-        #beg {
-            position: relative;
-            overflow: hidden;
+        /* Collab */
+        #collab { position: relative; }
+        .collab-card { padding: 44px 40px; max-width: 620px; margin: 0 auto; }
+        .collab-card h2 { font-size: 2rem; margin-bottom: 0; text-align: center; }
+        .collab-beg-text {
+            text-align: center; font-size: 1.15rem; font-weight: 700; color: var(--accent2);
+            margin-bottom: 6px; letter-spacing: -0.3px;
         }
-        #beg::before {
-            content: '';
-            position: absolute;
-            top: -20%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255, 77, 28, 0.06) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
+        .collab-tagline { text-align: center; color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 30px; }
+        .collab-form { max-width: 500px; margin: 0 auto; }
+        .collab-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 0; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block; font-size: 0.7rem; font-weight: 600; color: var(--text-secondary);
+            margin-bottom: 8px; font-family: var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase;
         }
-        .beg-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 56px 60px;
-            text-align: center;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        .form-group label .hint { font-weight: 400; color: var(--text-muted); font-size: 0.64rem; text-transform: none; letter-spacing: 0; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; background: var(--input-bg); border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm); padding: 13px 16px; color: var(--text);
+            font-size: 0.9rem; font-family: var(--font-sans); transition: all 0.3s; outline: none; resize: vertical;
         }
-        .beg-card:hover {
-            border-color: rgba(255, 77, 28, 0.3);
-            box-shadow: 0 0 80px rgba(255, 77, 28, 0.06);
+        .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); font-size: 0.8rem; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); background: var(--glass-hover);
         }
-        .beg-card h2 { 
-            font-size: 2.4rem; 
-            margin-bottom: 20px; 
+        .form-group select {
+            appearance: none; -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23545170' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;
+            cursor: pointer;
         }
-        .beg-card .beg-emoji {
-            font-size: 3.5rem;
-            display: block;
-            margin-bottom: 24px;
-            animation: bounce-beg 2.5s ease-in-out infinite;
-        }
-        @keyframes bounce-beg {
-            0%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-8px); }
-        }
-        .beg-form {
-            max-width: 560px;
-            margin: 36px auto 0;
-            text-align: left;
-        }
-        .beg-form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-bottom: 0;
-        }
-        .beg-form-group {
-            margin-bottom: 22px;
-        }
-        .beg-form-group label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 10px;
-            font-family: var(--font-mono);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-        .beg-form-group label .sarcastic-hint {
-            font-weight: 400;
-            font-style: italic;
-            color: var(--text-muted);
-            font-size: 0.7rem;
-            text-transform: none;
-            letter-spacing: 0;
-            margin-left: 6px;
-        }
-        .beg-form-group input,
-        .beg-form-group textarea,
-        .beg-form-group select {
-            width: 100%;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 14px 18px;
-            color: #ffffff;
-            font-size: 0.93rem;
-            font-family: var(--font-sans);
-            transition: all 0.3s;
-            outline: none;
-            resize: vertical;
-        }
-        .beg-form-group input::placeholder,
-        .beg-form-group textarea::placeholder {
-            color: #3a3a50;
-            font-style: italic;
-            font-size: 0.88rem;
-        }
-        .beg-form-group input:focus,
-        .beg-form-group textarea:focus,
-        .beg-form-group select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(255, 77, 28, 0.08);
-            background: #0a0a16;
-        }
-        .beg-form-group select {
-            appearance: none;
-            -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235e5e78' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 44px;
-        }
-        .beg-form-group select option {
-            background: var(--surface);
-            color: #ffffff;
-        }
-        .beg-form .btn {
-            width: 100%;
-            text-align: center;
-            justify-content: center;
-            padding: 18px;
-            font-size: 1rem;
-            margin-top: 12px;
-        }
+        .form-group select option { background: var(--dropdown-bg); color: var(--dropdown-text); padding: 10px; }
+        .collab-form .btn { width: 100%; justify-content: center; padding: 16px; font-size: 0.95rem; margin-top: 8px; }
+        .collab-note { margin-top: 16px; font-size: 0.65rem; color: var(--text-muted); text-align: center; line-height: 1.6; }
 
-        /* ============ TIMELINE ============ */
-        #timeline {
-            background: var(--bg-alt);
+        /* Contact */
+        .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
+        .contact-card {
+            padding: 20px 24px; text-decoration: none; display: flex;
+            align-items: center; gap: 14px; min-width: 0;
         }
-        .timeline-list {
-            max-width: 700px;
-        }
-        .timeline-item {
-            display: flex;
-            gap: 24px;
-            padding: 32px 0;
-            border-bottom: 1px solid var(--border);
-            align-items: flex-start;
-            transition: all 0.3s;
-            cursor: default;
-        }
-        .timeline-item:last-child {
-            border-bottom: none;
-        }
-        .timeline-item:hover {
-            border-bottom-color: rgba(255, 77, 28, 0.3);
-            padding-left: 8px;
-        }
-        .timeline-icon {
-            font-size: 2rem;
-            min-width: 52px;
-            height: 52px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--surface);
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-            flex-shrink: 0;
-        }
-        .timeline-item:hover .timeline-icon {
-            border-color: var(--accent);
-            transform: scale(1.08) rotate(-3deg);
-            box-shadow: 0 0 25px rgba(255, 77, 28, 0.15);
-        }
-        .timeline-content h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-        .timeline-content p { 
-            font-size: 0.92rem; 
-            margin: 0; 
-            color: var(--text-secondary); 
-            line-height: 1.6;
-        }
-        .timeline-content .savage-line {
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 0.82rem;
-            margin-top: 8px;
-            font-style: italic;
-        }
+        .contact-card .c-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .contact-card .c-label { color: var(--text-muted); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 2px; }
+        .contact-card .c-value { color: var(--text); font-weight: 500; font-size: 0.88rem; word-break: break-all; }
 
-        /* ============ SKILLS ============ */
-        .skills-cloud { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 12px; 
-            margin-top: 8px;
-        }
-        .skill-tag {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 12px 22px;
-            border-radius: 100px;
-            font-size: 0.88rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            letter-spacing: -0.1px;
-            cursor: default;
-        }
-        .skill-tag:hover {
-            border-color: var(--accent);
-            color: #ffffff;
-            background: var(--surface-hover);
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-        }
-        .skill-tag.god-tier {
-            border-color: rgba(240, 185, 51, 0.4);
-            color: var(--gold);
-            font-weight: 600;
-            background: rgba(240, 185, 51, 0.05);
-        }
-        .skill-tag.god-tier:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--surface-hover);
-            box-shadow: 0 0 30px rgba(255, 77, 28, 0.2);
-        }
-
-        /* ============ CONTACT ============ */
-        .contact-links {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            margin-top: 28px;
-        }
-        .contact-link-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 20px 24px;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .contact-link-card:hover {
-            border-color: var(--accent);
-            background: var(--surface-hover);
-            transform: translateY(-2px);
-        }
-        .contact-link-card .contact-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-        .contact-link-card .contact-info {
-            font-size: 0.9rem;
-        }
-        .contact-link-card .contact-label {
-            color: var(--text-muted);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        .contact-link-card .contact-value {
-            color: #ffffff;
-            font-weight: 500;
-        }
-
-        /* ============ FOOTER ============ */
+        /* Footer */
         footer {
-            border-top: 1px solid var(--border);
-            padding: 50px 0 40px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.84rem;
-            background: var(--bg);
+            padding: 44px 0 36px; text-align: center; color: var(--text-muted);
+            font-size: 0.82rem; border-top: 1px solid var(--glass-border);
         }
-        footer .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 28px;
-            margin-bottom: 24px;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-        footer .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.85rem;
-            transition: color 0.25s;
-        }
-        footer .footer-links a:hover { 
-            color: var(--accent); 
-        }
-        footer .footer-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-        footer .footer-name .gold {
-            color: var(--gold);
-        }
-        footer .disclaimer {
-            font-size: 0.7rem;
-            color: #3a3a50;
-            margin-top: 14px;
-            font-family: var(--font-mono);
-            line-height: 1.7;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        footer .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; list-style: none; flex-wrap: wrap; }
+        footer .footer-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.83rem; transition: color 0.3s; }
+        footer .footer-links a:hover { color: var(--accent); }
+        footer .footer-brand { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; color: var(--text); font-family: var(--font-grotesk); }
+        footer .footer-brand .gold { color: var(--gold); }
+        footer .footer-note { font-size: 0.62rem; color: var(--text-muted); margin-top: 10px; font-family: var(--font-mono); line-height: 1.6; max-width: 460px; margin-left: auto; margin-right: auto; }
 
-        /* ============ RESPONSIVE ============ */
         @media (max-width: 860px) {
-            .brag-grid { grid-template-columns: repeat(2, 1fr); }
-            .about-grid { grid-template-columns: 1fr; gap: 40px; }
-            .contact-links { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 600px) {
-            .container { padding: 0 20px; }
-            .nav-inner { padding: 0 20px; }
-            .nav-links { gap: 16px; }
-            .nav-links a { font-size: 0.75rem; }
-            .hero-title { font-size: 2.8rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-grid { grid-template-columns: 1fr; gap: 36px; }
+            .contact-grid { grid-template-columns: 1fr 1fr; }
+            .hero-title { font-size: 3.2rem; }
             h2 { font-size: 2rem; }
+        }
+        @media (max-width: 540px) {
+            .container { padding: 0 18px; }
+            .nav-inner { padding: 0 18px; height: 58px; }
+            .nav-logo { font-size: 1.1rem; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.7rem; }
+            .hero-title { font-size: 2.2rem; }
+            h2 { font-size: 1.6rem; }
             .btn-group { flex-direction: column; }
-            .btn-outline { margin-left: 0; }
-            .brag-grid { grid-template-columns: 1fr; }
-            .beg-form-row { grid-template-columns: 1fr; }
-            .beg-card { padding: 36px 24px; }
-            section { padding: 80px 0; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .collab-form-row { grid-template-columns: 1fr; }
+            .collab-card { padding: 30px 20px; }
+            .quote-card { padding: 24px 22px; }
+            section { padding: 70px 0; }
             section:first-of-type { padding-top: 120px; }
-            .testimonial-grid { gap: 12px; }
-            .quote-card { padding: 28px 24px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGATION -->
+    <canvas id="bgCanvas"></canvas>
+
     <nav id="navbar">
         <div class="nav-inner">
-            <a href="#hero" class="nav-logo" style="text-decoration:none;">Shivam Sharma</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#brags">Stats</a></li>
-                <li><a href="#testimonials">Praise</a></li>
-                <li><a href="#beg">Collab</a></li>
-                <li><a href="#contact">Reach</a></li>
-            </ul>
+            <a href="#hero" class="nav-logo">Shivam Sharma</a>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#stats">Stats</a></li>
+                    <li><a href="#testimonials">Praise</a></li>
+                    <li><a href="#collab">Collab</a></li>
+                    <li><a href="#contact">Reach</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+            </div>
         </div>
     </nav>
 
-    <!-- HERO -->
     <section id="hero">
         <div class="container">
             <div class="hero-content reveal">
-                <div class="hero-badge">
-                    <span class="crown">👑</span> Open to admiration & coffee offerings
-                </div>
+                <div class="hero-pill"><span class="dot"></span> Currently accepting admiration</div>
                 <h1 class="hero-title">
                     <span class="name-line">Shivam Sharma</span>
-                    <span class="subtitle-line">The Greatest of the Greatest of the Greatest™</span>
+                    <span class="subtitle-line">The Greatest of the Greatest™</span>
                 </h1>
                 <p class="hero-subtitle">
-                    I don't chase dreams. <span class="savage">Dreams chase me.</span> 
-                    A generational talent who turned procrastination into an art form. 
-                    <span class="gold-text">You're witnessing the main character.</span>
+                    I don't chase expectations. <span class="savage">Expectations chase me.</span>
+                    A generational talent operating at the intersection of confidence and results.
+                    <span class="blue-text">You're looking at the benchmark.</span>
                 </p>
                 <div class="btn-group">
-                    <a href="#brags" class="btn">See the Receipts ↓</a>
-                    <a href="#beg" class="btn btn-outline">Beg for a Collab →</a>
+                    <a href="#stats" class="btn btn-primary">See the Receipts ↓</a>
+                    <a href="#collab" class="btn btn-outline">Request a Collab →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about">
         <div class="container">
-            <span class="section-label reveal">📜 The Origin Story</span>
+            <span class="section-badge reveal">📜 Who Am I? Glad You Asked.</span>
             <div class="about-grid">
-                <div class="about-text reveal">
-                    <h2>Who does this guy think he is?</h2>
+                <div class="reveal">
+                    <h2>Let me break it down for you.</h2>
                     <p>
-                        Shivam Sharma. A name so powerful that <span class="highlight">even autocorrect hesitates.</span> 
-                        Student by enrollment, phenomenon by existence. 
-                        <span class="savage">I don't fit in boxes — boxes reshape themselves around me.</span>
+                        I'm Shivam. Student by technicality. Phenomenon by reality.
+                        While others follow the syllabus, <span class="highlight">the syllabus follows my interpretation of it.</span>
+                        I don't just think outside the box — I convinced the box it never existed.
                     </p>
                     <p>
-                        My confidence isn't arrogance. It's a <span class="highlight">public service.</span> 
-                        Someone needs to demonstrate what peak human potential looks like — 
-                        even on standby mode. I'm basically a screensaver: 
-                        <span class="savage">beautiful, captivating, doing absolutely nothing.</span>
+                        My confidence isn't a personality trait. It's <span class="savage">a public service.</span>
+                        The world needs someone to recalibrate what's possible. I'm just doing my part.
                     </p>
                 </div>
-                <div class="about-highlight-box reveal">
-                    <h3>⚡ Current Status Board</h3>
-                    <ul>
-                        <li>
-                            <span class="icon">🎯</span> 
-                            <span>Actively procrastinating... successfully</span>
-                        </li>
-                        <li>
-                            <span class="icon">🧠</span> 
-                            <span>Brain: 2% studies, 98% random brilliance</span>
-                        </li>
-                        <li>
-                            <span class="icon">☕</span> 
-                            <span>Caffeine dependency: critical</span>
-                        </li>
-                        <li>
-                            <span class="icon">👑</span> 
-                            <span>Ego level: healthy (very, very healthy)</span>
-                        </li>
+                <div class="glass-card about-box reveal">
+                    <h3>Live Status Report</h3>
+                    <ul class="status-list">
+                        <li><span class="s-icon">🎯</span><span>Currently: Excelling without excessive effort</span></li>
+                        <li><span class="s-icon">🧠</span><span>Mental bandwidth: 2% coursework, 98% big picture</span></li>
+                        <li><span class="s-icon">💡</span><span>Ideas generated per minute: Statistically significant</span></li>
+                        <li><span class="s-icon">👑</span><span>Ego check: Perfectly balanced (my scale, my rules)</span></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- BRAG SECTION -->
-    <section id="brags">
+    <section id="stats">
         <div class="container">
-            <span class="section-label reveal">📊 Verified Statistics</span>
-            <h2 class="reveal">Numbers that make mathematicians nervous.</h2>
-            <p class="reveal" style="margin-bottom: 8px;">
-                Audited by the <span class="savage">International Bureau of Just Trust Me.</span> 
-                Peer-reviewed by my bathroom mirror. Unanimous approval.
+            <span class="section-badge reveal">📊 Numbers That Speak Louder Than Words</span>
+            <h2 class="reveal">The data doesn't need interpretation.</h2>
+            <p class="reveal" style="margin-bottom: 4px;">
+                Audited by the <span class="savage">Institute of Just Trust Me On This.</span>
+                Peer-reviewed by my reflection. Unanimous.
             </p>
-            <div class="brag-grid">
-                <div class="brag-card reveal">
-                    <div class="brag-number">#1</div>
-                    <div class="brag-label">Overall Ranking</div>
-                    <div class="brag-sub">Competition status: missing. Case file: ice cold.</div>
-                </div>
-                <div class="brag-card reveal">
-                    <div class="brag-number">∞²</div>
-                    <div class="brag-label">Aura Points</div>
-                    <div class="brag-sub">Measuring instruments exploded. Scientists gave up. New field of study created.</div>
-                </div>
-                <div class="brag-card reveal">
-                    <div class="brag-number">0</div>
-                    <div class="brag-label">Apologies Ever</div>
-                    <div class="brag-sub">Why apologize when statistically always correct? Moving on.</div>
-                </div>
-                <div class="brag-card reveal">
-                    <div class="brag-number">100%</div>
-                    <div class="brag-label">Self-Approval</div>
-                    <div class="brag-sub">External validation? Adorable but unnecessary. I self-validate twice daily.</div>
-                </div>
-                <div class="brag-card reveal">
-                    <div class="brag-number">24/7</div>
-                    <div class="brag-label">Main Character</div>
-                    <div class="brag-sub">Sleep is just intermission. Dreams are still POV: me.</div>
-                </div>
-                <div class="brag-card reveal">
-                    <div class="brag-number">♾️</div>
-                    <div class="brag-label">Undefeated Rizz</div>
-                    <div class="brag-sub">Charm so effective it works on inanimate objects. My WiFi connects faster.</div>
-                </div>
+            <div class="stats-grid stagger-reveal reveal">
+                <div class="glass-card stat-card"><div class="stat-number">#1</div><div class="stat-label">Overall Ranking</div><div class="stat-sub">Competition? Filed a missing report. Cold case.</div></div>
+                <div class="glass-card stat-card"><div class="stat-number">∞²</div><div class="stat-label">Aura Points</div><div class="stat-sub">Instruments maxed out. Scientists resigned. New scale pending.</div></div>
+                <div class="glass-card stat-card"><div class="stat-number">0</div><div class="stat-label">Apologies Given</div><div class="stat-sub">When you're always right, apologies are redundant.</div></div>
+                <div class="glass-card stat-card"><div class="stat-number">100%</div><div class="stat-label">Self-Approval</div><div class="stat-sub">External validation appreciated but entirely optional.</div></div>
+                <div class="glass-card stat-card"><div class="stat-number">24/7</div><div class="stat-label">Main Character Status</div><div class="stat-sub">Sleep is intermission. Dreams still POV: Me.</div></div>
+                <div class="glass-card stat-card"><div class="stat-number">♾️</div><div class="stat-label">Rizz Factor</div><div class="stat-sub">So effective it works on inanimate objects. Tested.</div></div>
             </div>
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
     <section id="testimonials">
         <div class="container">
-            <span class="section-label reveal">🗣️ Voices of the Fortunate</span>
-            <h2 class="reveal">What people are forced to admit.</h2>
-            <p class="reveal" style="margin-bottom: 32px;">
-                <span class="savage">Disclaimer: I wrote these. Nobody else captures my essence accurately. It's honestly a burden.</span>
+            <span class="section-badge reveal">🗣️ Celebrity Quotes (100% Real. Definitely.)</span>
+            <h2 class="reveal">What the planet's most relevant people have said.</h2>
+            <p class="reveal" style="margin-bottom: 28px;">
+                <span class="savage">These are absolutely real. I have screenshots. You can't see them.</span>
             </p>
-            <div class="testimonial-grid">
-                <div class="quote-card reveal">
-                    <p class="quote-text">
-                        "Shivam joined our group project and contributed pure vibes. Unfiltered, premium vibes. 
-                        We got an A. I still cannot explain how. Physics cannot explain how."
-                    </p>
-                    <p class="quote-author">
-                        — <span class="name">Group Project Survivor</span> • Confused, Grateful, Slightly Terrified
-                    </p>
+            <div class="testimonial-grid stagger-reveal reveal">
+                <div class="glass-card quote-card">
+                    <p class="quote-text">"I thought launching rockets was peak innovation until I saw Shivam submit an assignment 3 days late and still get an A. That's the kind of efficiency I've been chasing for two decades."</p>
+                    <p class="quote-author">— <span class="name">Elon Musk</span> • CEO, Tesla & SpaceX • Visibly Impressed</p>
                 </div>
-                <div class="quote-card reveal">
-                    <p class="quote-text">
-                        "He once said 'I'm not competing, I'm setting the benchmark.' 
-                        I laughed. Then I looked around. The benchmark was alone. It was very quiet."
-                    </p>
-                    <p class="quote-author">
-                        — <span class="name">Inner Voice</span> • During an Exceptionally Good Hair Day
-                    </p>
+                <div class="glass-card quote-card">
+                    <p class="quote-text">"I built Amazon on customer obsession. Shivam built his reputation on self-obsession and somehow it's outperforming our quarterly projections. I've requested a meeting. No response yet."</p>
+                    <p class="quote-author">— <span class="name">Jeff Bezos</span> • Founder, Amazon • Awaiting Reply</p>
                 </div>
-                <div class="quote-card reveal">
-                    <p class="quote-text">
-                        "If overconfidence were a global currency, Shivam would own the economy. 
-                        And honestly? He'd probably run it better than current leadership."
-                    </p>
-                    <p class="quote-author">
-                        — <span class="name">The World Economy</span> • Currently Trembling
-                    </p>
+                <div class="glass-card quote-card">
+                    <p class="quote-text">"In 80 years of investing, I've learned to spot asymmetric returns. Shivam is the first asset class where confidence alone generates alpha. Berkshire has added him to the watchlist."</p>
+                    <p class="quote-author">— <span class="name">Warren Buffett</span> • CEO, Berkshire Hathaway • Genuinely Intrigued</p>
+                </div>
+                <div class="glass-card quote-card">
+                    <p class="quote-text">"At Apple, we value people who challenge conventions. Shivam doesn't challenge them — he rewrites them entirely. His presentation skills make our keynotes look like rehearsals."</p>
+                    <p class="quote-author">— <span class="name">Tim Cook</span> • CEO, Apple • Taking Notes</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- BEG FOR COLLAB -->
-    <section id="beg">
+    <section id="collab">
         <div class="container">
-            <div class="beg-card reveal">
-                <span class="beg-emoji">🧎</span>
-                <span class="section-label">🙏 The Desperate Corner</span>
-                <h2>Beg for a Collab</h2>
-                <p style="max-width: 560px; margin: 0 auto 8px; color: var(--text-secondary);">
-                    You've realized your project <span class="highlight">desperately needs greatness.</span> 
-                    Don't worry — happens to everyone. 
-                    <span class="savage">(Well, everyone else.)</span>
+            <span class="section-badge reveal" style="display:table; margin-left:auto; margin-right:auto;">🙏 The Desperate Corner</span>
+            <div class="glass-card collab-card reveal">
+                <h2>Want to work with me?</h2>
+                <p class="collab-beg-text">Beg for a Collab</p>
+                <p class="collab-tagline">
+                    You've realized your project needs greatness. That's the first step. Acceptance is the second. This form is the third.
                 </p>
-                <p style="max-width: 500px; margin: 0 auto 0; font-size: 0.9rem; color: var(--text-muted);">
-                    This is a <span class="gold-text">highly exclusive application process.</span> 
-                    Acceptance rate: statistically insignificant. But shoot your shot.
-                </p>
-
-                <form class="beg-form" action="#" method="POST">
-                    <div class="beg-form-row">
-                        <div class="beg-form-group">
-                            <label>
-                                Government Name
-                                <span class="sarcastic-hint">stage names will be laughed at</span>
-                            </label>
-                            <input type="text" name="name" placeholder="John Doe (the forgettable one)" required>
+                <form class="collab-form" action="#" method="POST">
+                    <div class="collab-form-row">
+                        <div class="form-group">
+                            <label>Your Name <span class="hint">don't overthink it</span></label>
+                            <input type="text" name="name" placeholder="e.g. Rohan, Priya, Alex..." required>
                         </div>
-                        <div class="beg-form-group">
-                            <label>
-                                Email for Rejection
-                                <span class="sarcastic-hint">yes, you'll check spam</span>
-                            </label>
-                            <input type="email" name="email" placeholder="you@desperate.com" required>
+                        <div class="form-group">
+                            <label>Email <span class="hint">replies may or may not arrive</span></label>
+                            <input type="email" name="email" placeholder="you@domain.com" required>
                         </div>
                     </div>
-                    <div class="beg-form-group">
-                        <label>
-                            Why Should I Care?
-                            <span class="sarcastic-hint">choose your tragic reason</span>
-                        </label>
+                    <div class="form-group">
+                        <label>What brings you here? <span class="hint">be specific, be honest, be brief</span></label>
                         <select name="reason" required>
-                            <option value="" disabled selected>— Select your desperation level —</option>
-                            <option value="fame">I need your fame to validate my existence</option>
-                            <option value="talent">My project is tragically lacking talent</option>
-                            <option value="clout">Chasing relevance through proximity</option>
-                            <option value="bored">Made a series of poor life decisions</option>
-                            <option value="mom">My mother suggested this (bless her heart)</option>
-                            <option value="other">Other (still equally desperate)</option>
+                            <option value="" disabled selected>— Pick your reason —</option>
+                            <option value="collab">I have a project that needs your brilliance</option>
+                            <option value="brand">I want your face on my brand</option>
+                            <option value="clout">Honestly? Chasing clout through association</option>
+                            <option value="advice">I need life advice from the best</option>
+                            <option value="fan">Just a fan passing by</option>
                         </select>
                     </div>
-                    <div class="beg-form-group">
-                        <label>
-                            Your Formal Plea
-                            <span class="sarcastic-hint">min 50 words, emojis permitted, dignity optional</span>
-                        </label>
-                        <textarea name="message" rows="5" placeholder="O Supreme Being Shivam, I approach with trembling hands and a hopeful heart... (continue groveling)" required minlength="50"></textarea>
+                    <div class="form-group">
+                        <label>Make your case <span class="hint">quality wins. desperation doesn't hurt.</span></label>
+                        <textarea name="message" rows="4" placeholder="Dear Shivam, here's why you should care about my proposal..." required></textarea>
                     </div>
-                    <div class="beg-form-group">
-                        <label>
-                            What's Your Offering?
-                            <span class="sarcastic-hint">coffee, snacks, eternal loyalty? specifics please</span>
-                        </label>
-                        <input type="text" name="offering" placeholder="e.g. Unlimited coffee + naming rights to my firstborn" required>
+                    <div class="form-group">
+                        <label>What's the offer? <span class="hint">equity? snacks? lifetime supply of something?</span></label>
+                        <input type="text" name="offering" placeholder="e.g. 15% equity + unlimited snacks + naming rights" required>
                     </div>
-                    <button type="submit" class="btn">
-                        🧎 Submit Your Humble Plea →
-                    </button>
-                    <p style="margin-top: 20px; font-size: 0.7rem; color: #4a4a60; text-align: center;">
-                        <span class="savage">⚠️ Warning:</span> Low-effort submissions will be printed and laughed at during social gatherings. 
-                        Quality pleas <span class="gold-text">might</span> receive a response. 
-                        <span class="gold-text">Might.</span> Dignity non-refundable.
+                    <button type="submit" class="btn btn-primary">Submit Your Case →</button>
+                    <p class="collab-note">
+                        <span class="savage">⚠️ Heads up:</span> Low-effort entries get laughed at. Good ones <span class="blue-text">might</span> get a reply. Response time: whenever I feel like it.
                     </p>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- TIMELINE -->
-    <section id="timeline">
-        <div class="container">
-            <span class="section-label reveal">⏳ The Chronicles</span>
-            <h2 class="reveal">A legacy in the making.</h2>
-            <div class="timeline-list">
-                <div class="timeline-item reveal">
-                    <div class="timeline-icon">🌟</div>
-                    <div class="timeline-content">
-                        <h4>Day Zero — The Universe Noticed</h4>
-                        <p>Born. Delivery room reported unusual confidence readings. Other newborns instinctively understood the hierarchy had shifted.</p>
-                        <p class="savage-line">Cried once. Judged the ceiling. Moved on to greater things.</p>
-                    </div>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="timeline-icon">🎯</div>
-                    <div class="timeline-content">
-                        <h4>School Arc — Reluctant Prodigy</h4>
-                        <p>Consistently confused educators by acing exams while staring contemplatively out of windows. "Potential," they whispered. "Boredom," I corrected.</p>
-                        <p class="savage-line">Parent-teacher meetings evolved into appreciation ceremonies. Uncomfortable but inevitable.</p>
-                    </div>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="timeline-icon">⚡</div>
-                    <div class="timeline-content">
-                        <h4>College Era — The Renaissance</h4>
-                        <p>Navigating academia with the swagger of someone who owns the place. (Documentation in progress.) Deadlines respect my schedule. Professors are adapting.</p>
-                        <p class="savage-line">Grades are temporary. Legend status is permanent.</p>
-                    </div>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="timeline-icon">🌍</div>
-                    <div class="timeline-content">
-                        <h4>Future — Global Recalibration</h4>
-                        <p>World improvement blueprint finalized. Several governments politely notified. Autobiography will replace traditional self-help literature entirely.</p>
-                        <p class="savage-line">Chapter 1: "You Tried." Chapter 2: "It's Okay, You're Not Me."</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills">
-        <div class="container">
-            <span class="section-label reveal">🎯 God-Given Advantages</span>
-            <h2 class="reveal">Things I'm unreasonably good at.</h2>
-            <p class="reveal" style="margin-bottom: 28px;">
-                <span class="savage">Imposter syndrome? Never met the guy. I have the polar opposite condition. It appears to be permanent.</span>
-            </p>
-            <div class="skills-cloud reveal">
-                <span class="skill-tag god-tier">Advanced Sarcasm</span>
-                <span class="skill-tag god-tier">Weaponized Confidence</span>
-                <span class="skill-tag god-tier">Building This Website</span>
-                <span class="skill-tag god-tier">Narrative Control</span>
-                <span class="skill-tag god-tier">Main Character Energy</span>
-                <span class="skill-tag">Zero-Effort Results</span>
-                <span class="skill-tag">Useless Trivia Recall</span>
-                <span class="skill-tag">Strategic Deadline Avoidance</span>
-                <span class="skill-tag">Unsolicited Life Advice</span>
-                <span class="skill-tag">Accidental Correctness</span>
-                <span class="skill-tag">Post-Send Typo Detection</span>
-                <span class="skill-tag">Strategic Awkward Silence</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT -->
     <section id="contact">
         <div class="container">
-            <span class="section-label reveal">📬 Approach With Caution</span>
-            <h2 class="reveal">Direct line to greatness.</h2>
-            <p class="reveal">
-                Whether it's praise, opportunities, or desperate collab requests — 
-                <span class="highlight">choose your reason carefully.</span> 
-                <span class="savage">My inbox is exclusive. Like a VIP lounge. With higher standards.</span>
+            <span class="section-badge reveal">📬 Find Me (Before I Find You)</span>
+            <h2 class="reveal">Stalk responsibly. I'll know.</h2>
+            <p class="reveal" style="margin-bottom: 8px;">
+                <span class="savage">Access is a privilege. Use these channels wisely.</span>
             </p>
-            <div class="contact-links reveal">
-                <a href="mailto:shivam@email.com" class="contact-link-card">
-                    <span class="contact-icon">📧</span>
-                    <div class="contact-info">
-                        <div class="contact-label">Email</div>
-                        <div class="contact-value">shivam@email.com</div>
-                    </div>
+            <div class="contact-grid stagger-reveal reveal">
+                <a href="https://instagram.com/stillshivam" target="_blank" rel="noopener" class="glass-card contact-card">
+                    <span class="c-icon">📸</span><div><div class="c-label">Instagram</div><div class="c-value">@stillshivam</div></div>
                 </a>
-                <a href="#" class="contact-link-card">
-                    <span class="contact-icon">💼</span>
-                    <div class="contact-info">
-                        <div class="contact-label">LinkedIn</div>
-                        <div class="contact-value">/in/shivam-sharma</div>
-                    </div>
+                <a href="https://x.com/shivamsharmanot" target="_blank" rel="noopener" class="glass-card contact-card">
+                    <span class="c-icon">𝕏</span><div><div class="c-label">X / Twitter</div><div class="c-value">@shivamsharmanot</div></div>
                 </a>
-                <a href="#" class="contact-link-card">
-                    <span class="contact-icon">🐦</span>
-                    <div class="contact-info">
-                        <div class="contact-label">Twitter / X</div>
-                        <div class="contact-value">@TheRealShivam</div>
-                    </div>
-                </a>
-                <a href="#" class="contact-link-card">
-                    <span class="contact-icon">📸</span>
-                    <div class="contact-info">
-                        <div class="contact-label">Instagram</div>
-                        <div class="contact-value">@shivam.sharma</div>
-                    </div>
+                <a href="mailto:shivamsharmacw@gmail.com" class="glass-card contact-card">
+                    <span class="c-icon">📧</span><div><div class="c-label">Email</div><div class="c-value">shivamsharmacw@gmail.com</div></div>
                 </a>
             </div>
-            <p class="reveal" style="margin-top: 32px; font-size: 0.85rem; color: var(--text-muted);">
-                <span class="gold-text">⚠️ Side effects of contacting me:</span> 
-                Permanent recalibration of your standards. Everyone else will seem underwhelming. No known cure.
+            <p class="reveal" style="margin-top: 26px; font-size: 0.78rem; color: var(--text-muted);">
+                <span class="gold-text">⚠️ Side effects of contacting me:</span> Your standards will permanently rise. Everyone else will seem average. No cure exists.
             </p>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container">
             <ul class="footer-links">
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#brags">Stats</a></li>
+                <li><a href="#stats">Stats</a></li>
                 <li><a href="#testimonials">Praise</a></li>
-                <li><a href="#beg">Collab</a></li>
-                <li><a href="#contact">Reach</a></li>
+                <li><a href="#collab">Collab</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-            <p class="footer-name">
-                © 2026 <span class="gold">Shivam Sharma</span> — The Greatest of the Greatest of the Greatest™
-            </p>
-            <p class="disclaimer">
-                ⚡ Human-crafted. Zero AI. Pure unfiltered self-belief. 
-                <br>All statements legally binding in the Court of My Opinion. 
-                <br>Modesty was never an option. Deceased before arrival. Unmourned.
+            <p class="footer-brand">© 2026 <span class="gold">Shivam Sharma</span> — The Greatest of the Greatest™</p>
+            <p class="footer-note">
+                🎭 Human-made. Zero AI. Pure unfiltered self-belief.
+                <br>All statements legally binding in the Court of My Opinion.
+                <br>Modesty was excluded at the design stage. It never stood a chance.
             </p>
         </div>
     </footer>
 
-    <!-- SCRIPTS -->
     <script>
-        // Scroll Reveal
-        const revealElements = document.querySelectorAll('.reveal');
+        // ============ ANIMATED BACKGROUND ============
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = 0, mouseY = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.1;
+                this.hue = Math.random() > 0.5 ? 230 : 270; // Blue or Violet
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Mouse attraction
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 200) {
+                    this.x += dx * 0.005;
+                    this.y += dy * 0.005;
+                }
+
+                if (this.x < -50 || this.x > canvas.width + 50 || this.y < -50 || this.y > canvas.height + 50) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `hsla(${this.hue}, 70%, 65%, ${this.opacity})`;
+                ctx.fill();
+
+                // Glow
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+                ctx.fillStyle = `hsla(${this.hue}, 70%, 65%, ${this.opacity * 0.15})`;
+                ctx.fill();
+            }
+        }
+
+        // Create particles
+        for (let i = 0; i < 120; i++) {
+            particles.push(new Particle());
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw connections
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(120,140,255,${0.04 * (1 - dist / 130)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // ============ SCROLL REVEAL ============
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    // Also trigger stagger children
+                    if (e.target.classList.contains('stagger-reveal')) {
+                        e.target.classList.add('visible');
+                    }
                 }
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        revealElements.forEach(el => observer.observe(el));
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Nav scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 40) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+        // ============ NAV SCROLL ============
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+        // ============ THEME TOGGLE ============
+        const toggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        toggle.addEventListener('click', () => {
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
         });
 
-        // Form placeholder
-        document.querySelector('.beg-form').addEventListener('submit', (e) => {
+        // ============ FORM ============
+        document.querySelector('.collab-form').addEventListener('submit', e => {
             e.preventDefault();
-            alert('🚧 Form not connected yet!\n\nFormspree se baad mein link karenge.\nAbhi ke liye — sirf sarcasm.');
+            alert('📬 Submission portal offline.\n\nFormspree integration pending.\nYour proposal is safe... for now.');
         });
     </script>
-
 </body>
 </html>
